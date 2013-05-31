@@ -1,0 +1,13 @@
+﻿using System.Collections.Generic;
+using Mater.Evolution.Client.ApplicationModel.Interop;
+
+namespace Mater.Evolution.Client.Controls.OnScreenKeyboard.LogicalKeys
+{
+    public class CaseSensitiveKey : MultiCharacterKey
+    {
+        public CaseSensitiveKey(VirtualKeyCode keyCode, IList<string> keyDisplays)
+            : base(keyCode, keyDisplays)
+        {
+        }
+    }
+}

@@ -15,6 +15,7 @@
     <WarningLevel>4</WarningLevel>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
+    <ExpressionBlendVersion>5.0.40218.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -71,6 +72,7 @@
     <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.16\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero" />
     <Reference Include="SharpZebra">
       <HintPath>..\packages\SharpZebra.dll</HintPath>
     </Reference>
@@ -140,6 +142,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CustomerWindow.xaml.cs">
+      <DependentUpon>CustomerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Messages\Application\ActivateBusyIndicatorRequest.cs" />
     <Compile Include="Messages\Application\DeActivateBusyIndicatorRequest.cs" />
     <Compile Include="Messages\Application\NavigatorActivateScreenRequest.cs" />
@@ -147,6 +152,9 @@
     <Compile Include="ServerApi\Extensions.cs" />
     <Compile Include="ServerApi\TForm.cs" />
     <Compile Include="ServerApi\TLink.cs" />
+    <Compile Include="ShellView.xaml.cs">
+      <DependentUpon>ShellView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ShellViewModel.cs" />
     <Compile Include="ServerApi\StatefulHttpClient.cs" />
     <Compile Include="Utils\CustomTransitioningContentControl.cs" />
@@ -156,6 +164,8 @@
     <Compile Include="Utils\MessageAggregator.cs" />
     <Compile Include="ServerApi\StatefulResponse.cs" />
     <Compile Include="Utils\LabelPrinter.cs" />
+    <Compile Include="Utils\PosTextBox.cs" />
+    <Compile Include="Utils\WatermarkService.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PriceListItemViewModel.cs" />
     <Compile Include="ViewModels\PriceListViewModel.cs" />
@@ -163,6 +173,8 @@
     <Compile Include="ViewModels\ProductsViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\ReferenceViewModel.cs" />
+    <Compile Include="ViewModels\Sale\ItemViewModel.cs" />
+    <Compile Include="ViewModels\Sale\SaleViewModel.cs" />
     <Compile Include="ViewModels\SuggestionsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -197,6 +209,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="CustomerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -230,6 +246,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ReferenceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Sale\ItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Sale\SaleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

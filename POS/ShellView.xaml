@@ -14,11 +14,11 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Rectangle Grid.RowSpan="3" Fill="{StaticResource background}"/>
-        <Grid Margin="8,8,8,4" Background="#CCFFFFFF">
+        <Grid Visibility="{Binding IsToolsVisible}" Margin="8,8,8,4" Background="#CCFFFFFF">
             <Button Content="Back" x:Name="GoBack" HorizontalAlignment="Left" Padding="8" Margin="2" Style="{DynamicResource BackButtonStyle}" Width="80" Background="#FF52C0D7"/>
             <Button Content="Show kb" x:Name="ShowKeyboard" Padding="8" Margin="2" Style="{DynamicResource ShowKeyboardButtonStyle}" Grid.ColumnSpan="2" Width="80" Height="80" HorizontalAlignment="Right"/>
         </Grid>
-        <ContentControl Margin="8,4,8,8" Grid.Row="1" x:Name="ActiveItem" />
+        <ContentControl Grid.Row="1" x:Name="ActiveItem" />
         <WpfKb:OnScreenKeyboard Grid.Row="3"
             x:Name="Keyboard" Height="300"
             Visibility="{Binding IsKeyboardVisible}"/>

@@ -61,7 +61,7 @@ namespace POS
         {
             base.OnStartup(sender, e);
 
-            var data = new Dictionary<string, string>() { { "posisNomeri", "p1" } };
+            var data = new Dictionary<string, string>() { { "posisNomeri", ConfigurationManager.AppSettings["pos"] } };
             var viewModel = await _httpClient.GetAsync(ConfigurationManager.AppSettings["host"])
                                     .SubmitFormAsync("airchiePosi", data)
                                     .GetScreenAsync();

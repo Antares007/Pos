@@ -1,0 +1,13 @@
+﻿<Window x:Class="POS.CustomerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStyle="None"
+        Title="CustomerWindow" Height="600" Width="800">
+    <Grid>
+        <Rectangle>
+            <Rectangle.Fill>
+                <VisualBrush Stretch="Fill" Visual="{Binding}" />
+            </Rectangle.Fill>
+        </Rectangle>
+    </Grid>
+</Window>

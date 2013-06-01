@@ -9,6 +9,7 @@ using CsQuery;
 using POS.Messages.Application;
 using POS.ViewModels;
 using POS.Utils;
+using POS.ViewModels.Sale;
 
 namespace POS.ServerApi
 {
@@ -66,7 +67,7 @@ namespace POS.ServerApi
                                                       {
                                                           Name = pCq[".dasakheleba"].Text(),
                                                           Eans = pCq[".eans"].Text(),
-                                                          Photo = pCq[".images .image"].Select(x=> x.Attributes["src"]).FirstOrDefault(),
+                                                          Photo = pCq[".image"].Attr("src"),
                                                           Open = new TLink(pCq["a"].Attr("href"), transitLink),
                                                       }).ToBindableCollection(),
                                         Search = cq.MakeTForm("dzebna", transitLink)
@@ -117,9 +118,45 @@ namespace POS.ServerApi
                                                 Barcode = x.InnerText, 
                                                 Open = new TLink(x.Attributes["href"], transitLink)
                                             }).ToBindableCollection(),
-                                        Photos = cq[".images"].Select(x=>x.Attributes["src"]).ToBindableCollection()
+                                        Photos = cq["img"].Select(x=>x.Attributes["src"])
+                                        .ToBindableCollection()
                                     };
                                 return productViewModel;
+                            }
+                    },
+                    {
+                        "gakidva",(client, cq, res) =>
+                            {
+                                Action<HttpRequestMessage> transitLink = async (req) =>
+                                    {
+                                        await client.SendAsync(req);
+                                    };
+                                 Action<HttpRequestMessage> transitLink2 = async (req) =>
+                                {
+                                    var screen = await client.SendAsync(req).GetScreenAsync();
+                                    PosBootstrapper._msg.Publish(new NavigatorActivateScreenRequest(screen));
+                                };
+                                var saleViewModel = new SaleViewModel
+                                    {
+                                        Items = (from p in cq[".yvela .produkti"]
+                                                 let pCq = CQ.Create(p)
+                                                 select new ItemViewModel()
+                                                     {
+                                                         Name = pCq[".dasakheleba"].Text(),
+                                                         Ean = pCq[".ean"].Text(),
+                                                         Reference = pCq[".ref"].Text(),
+                                                         Quantity = pCq[".raodenoba"].Text(),
+                                                         UnitPrice = pCq[".fasi"].Text(),
+                                                         TotalPrice = pCq[".jami"].Text(),
+                                                         Photo = pCq["img"].Attr("src"),
+                                                     }).ToBindableCollection(),
+                                        Total = cq[".misagebiTankha"].Text(),
+                                        Change = cq[".gasacemiTankha"].Text(),
+                                        PaymentForm = cq.MakeTForm("gadakhda", transitLink),
+                                        AddItem = cq.MakeTForm("produktisDamateba", transitLink2),
+                                        Submit = cq.MakeTForm("dasruleba", transitLink2),
+                                    };
+                                return saleViewModel;
                             }
                     }
                 };

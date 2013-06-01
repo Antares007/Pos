@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Configuration;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -28,7 +29,7 @@ namespace POS
             get { return _isKeyboardVisible; }
             set { _isKeyboardVisible = value; NotifyOfPropertyChange(() => IsKeyboardVisible); }
         }
-
+        public Visibility IsToolsVisible { get { return ConfigurationManager.AppSettings["pos"] == "pos1" ? Visibility.Collapsed : Visibility.Visible; } }
         //public async void ChangeBackground()
         //{
         //    while (true)
@@ -49,7 +50,7 @@ namespace POS
                 .Subscribe(req => Show(req.Screen));
             msgAgr.GetStream<NavigatorGoBackRequest>()
                 .Subscribe(req => GoBack());
-            //    ChangeBackground();
+            //    ChangeBackground(); 
             IsKeyboardVisible = Visibility.Collapsed;
         }
 
@@ -75,7 +76,7 @@ namespace POS
         }
         public void ShowKeyboard()
         {
-            IsKeyboardVisible = IsKeyboardVisible==Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
+            IsKeyboardVisible = IsKeyboardVisible == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 }

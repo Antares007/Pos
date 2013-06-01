@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="POS.Views.Sale.SaleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:WpfKb.Controls;assembly=WpfKb" 
+             xmlns:utils="clr-namespace:POS.Utils"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+             mc:Ignorable="d" 
+             d:DesignHeight="766" d:DesignWidth="1024">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="1.1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Background="#CCFFFFFF" Margin="4,4,2,4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBox cal:Message.Attach="[Event PreviewKeyDown] = [Action BarcodeTextBoxKeyDown($eventArgs)]"
+                Text="{Binding AddItem[kodi],Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                     Margin="2" FontSize="16">
+            </TextBox>
+            <ItemsControl Grid.Row="1" x:Name="Items">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+            <Grid Margin="4" Grid.Row="2" TextBlock.FontSize="40">
+                <TextBlock  Foreground="Red" x:Name="Total" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Foreground="Green" x:Name="Change" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            </Grid>
+        </Grid>
+        <Grid Margin="2,4,4,4" Background="#CCFFFFFF" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid x:Name="PaymentForms">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <AdornerDecorator Margin="2">
+                    <TextBox 
+                        Text="{Binding PaymentForm[nagdi],Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                        utils:TextBoxProperties.HighlightTextOnFocus="True" FontSize="24" TextAlignment="Right">
+                        <utils:WatermarkService.Watermark>
+                            <TextBlock FontSize="24" TextAlignment="Right" Margin="0,0,4,0">ნაღდი</TextBlock>
+                        </utils:WatermarkService.Watermark>
+                    </TextBox>
+                </AdornerDecorator>
+                <AdornerDecorator  Margin="2" Grid.Row="1">
+                    <TextBox Text="{Binding PaymentForm[sakreditoBarati],Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                        utils:TextBoxProperties.HighlightTextOnFocus="True" FontSize="24" TextAlignment="Right">
+                        <utils:WatermarkService.Watermark>
+                            <TextBlock FontSize="24" TextAlignment="Right" Margin="0,0,4,0">საკრედიტო ბარათი</TextBlock>
+                        </utils:WatermarkService.Watermark>
+                    </TextBox>
+                </AdornerDecorator>
+                <AdornerDecorator Margin="2" Grid.Row="2">
+                    <TextBox Text="{Binding PaymentForm[sasachukreBarati],Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                        utils:TextBoxProperties.HighlightTextOnFocus="True" FontSize="24" TextAlignment="Right">
+                        <utils:WatermarkService.Watermark>
+                            <TextBlock FontSize="24" TextAlignment="Right" Margin="0,0,4,0">სასაჩუქრე ბარათი</TextBlock>
+                        </utils:WatermarkService.Watermark>
+                    </TextBox>
+                </AdornerDecorator>
+                <Button Command="{Binding PaymentForm}" Margin="4" Content="ხურდის დათვლა" Grid.Row="3" Style="{DynamicResource PaymentSubmitButtonStyle}" Foreground="White" FontSize="22"/>
+            </Grid>
+            <controls:OnScreenKeypad Margin="4" Grid.Row="1"/>
+            <Button Margin="4" Content="გადახდა" Command="{Binding Submit}" Grid.Row="2" Padding="24" Style="{DynamicResource PaymentSubmitButtonStyle}" Foreground="White" FontSize="29.333"/>
+        </Grid>
+    </Grid>
+</UserControl>

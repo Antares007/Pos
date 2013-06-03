@@ -4,6 +4,6 @@ namespace POS
 {
     public interface IShell
     {
-        void Show(ScreenActivationContext screenActivationContext);
+        void Show(ScreenActivationContext sac);
     }
 }

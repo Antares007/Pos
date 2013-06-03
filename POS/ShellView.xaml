@@ -2,7 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:WpfKb="clr-namespace:WpfKb.Controls;assembly=WpfKb"
+        xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
         Title="ShellView"
+        cal:Message.Attach="[Event PreviewKeyDown] = [Action KeyDown($eventArgs)]"
 		Height="766" Width="1024" Background="{x:Null}">
     <Window.Resources>
         <ImageBrush x:Key="background" ImageSource="/Resources/Images/Backgrounds/1.jpg"/>

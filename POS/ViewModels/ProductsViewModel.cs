@@ -4,7 +4,7 @@ using POS.ServerApi;
 namespace POS.ViewModels
 {
     [Title("produktebi")]
-    public class ProductsViewModel : Screen, IUpdatableScreen
+    public class ProductsViewModel : HyperMediaViewModel
     {
         public BindableCollection<ProductItemViewModel> Items { get; set; }
 
@@ -14,7 +14,7 @@ namespace POS.ViewModels
         {
             Items = new BindableCollection<ProductItemViewModel>();
         }
-        public void UpdateUi(ScreenActivationContext sac)
+        public override void UpdateUi(ScreenActivationContext sac)
         {
             Search = sac.Cqq.GetForm("dzebna");
             Items.Clear();

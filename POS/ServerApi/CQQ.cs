@@ -68,5 +68,13 @@ namespace POS.ServerApi
         {
             return new TLink(_cq.Attr("href"), _action);
         }
+
+        public bool IsTitle(string title,Action<CQQ> action = null)
+        {
+            var result = this.GetText("head title") == title;
+            if (result && action!=null)
+                action(this);
+            return result;
+        }
     }
 }

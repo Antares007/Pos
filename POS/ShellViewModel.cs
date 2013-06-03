@@ -2,19 +2,23 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Configuration;
+using System.Diagnostics;
+using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Threading;
 using Caliburn.Micro;
 using CsQuery;
 using POS.ServerApi;
 using POS.Utils;
 using System.Linq;
+using KeyConverter = POS.Utils.KeyConverter;
 
 namespace POS
 {
     [Export, PartCreationPolicy(CreationPolicy.Shared)]
-    public class ShellViewModel : Conductor<IScreen>,IShell
+    public class ShellViewModel : Conductor<IScreen>, IShell
     {
         private Visibility _isKeyboardVisible;
         public Visibility IsKeyboardVisible
@@ -37,17 +41,32 @@ namespace POS
             IsKeyboardVisible = IsKeyboardVisible == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        public void Show(ScreenActivationContext screenActivationContext)
+        public void Show(ScreenActivationContext sac)
         {
-            var screenType = screenActivationContext.GetScreenType();
-            if (ActiveItem != null && this.ActiveItem is IUpdatableScreen && this.ActiveItem.GetType() == screenType)
-                ((IUpdatableScreen)ActiveItem).UpdateUi(screenActivationContext);
+            //var screenType = sac.GetScreenType();
+            if (ActiveItem != null && this.ActiveItem is IUpdatableScreen && ((IUpdatableScreen)this.ActiveItem).CanHandle(sac))
+                ((IUpdatableScreen)ActiveItem).UpdateUi(sac);
             else
-               this.ActivateItem(screenActivationContext.GetScreen());
+                this.ActivateItem(sac.GetScreen());
         }
         public void GoBack()
         {
             Navigator.GoBack();
         }
+
+
+        public void KeyDown(KeyEventArgs args)
+        {
+            Scanner.ObservableKeys.OnNext(KeyConverter.GetCharFromKey(args.Key));
+        }
+
+    }
+    public static class Scanner
+    {
+        static Scanner()
+        {
+            ObservableKeys = new Subject<char>();
+        }
+        public static ISubject<char> ObservableKeys { get; set; }
     }
 }

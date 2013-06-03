@@ -7,7 +7,7 @@ using System.Linq;
 namespace POS.ViewModels
 {
     [Title("produkti")]
-    public class ProductViewModel : Screen, IUpdatableScreen
+    public class ProductViewModel : HyperMediaViewModel
     {
         private string _activePhoto;
         private TForm _price;
@@ -102,7 +102,7 @@ namespace POS.ViewModels
                     .PrintPrice(decimal.Parse(Price["fasi"]));
         }
 
-        public void UpdateUi(ScreenActivationContext sac)
+        public override void UpdateUi(ScreenActivationContext sac)
         {
             var cqq = sac.Cqq;
             Id = cqq.GetText(".partiebi .partia .id");

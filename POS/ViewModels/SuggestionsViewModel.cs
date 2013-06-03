@@ -4,7 +4,7 @@ using POS.ServerApi;
 namespace POS.ViewModels
 {
     [Title("suggestions")]
-    public class SuggestionsViewModel : Screen,IUpdatableScreen
+    public class SuggestionsViewModel : HyperMediaViewModel
     {
         public BindableCollection<SuggestionViewModel> Items { get; set; }
 
@@ -12,7 +12,7 @@ namespace POS.ViewModels
         {
             Items = new BindableCollection<SuggestionViewModel>();
         }
-        public void UpdateUi(ScreenActivationContext sac)
+        public override void UpdateUi(ScreenActivationContext sac)
         {
            Items.Clear();
            Items.AddRange(sac.Cqq.All("#suggestions .suggest", cqq => new SuggestionViewModel()

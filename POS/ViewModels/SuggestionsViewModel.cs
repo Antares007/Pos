@@ -3,12 +3,26 @@ using POS.ServerApi;
 
 namespace POS.ViewModels
 {
-    public class SuggestionsViewModel : Screen
+    [Title("suggestions")]
+    public class SuggestionsViewModel : Screen,IUpdatableScreen
     {
-        public BindableCollection<SuggestionViewModel> Items { get; set; } 
-    }
+        public BindableCollection<SuggestionViewModel> Items { get; set; }
 
-    public class SuggestionViewModel:Screen
+        public SuggestionsViewModel()
+        {
+            Items = new BindableCollection<SuggestionViewModel>();
+        }
+        public void UpdateUi(ScreenActivationContext sac)
+        {
+           Items.Clear();
+           Items.AddRange(sac.Cqq.All("#suggestions .suggest", cqq => new SuggestionViewModel()
+               {
+                   Name = cqq.GetText(),
+                   Link = cqq.GetLink()
+               }));
+        }
+    }
+    public class SuggestionViewModel : Screen
     {
         public string Name { get; set; }
         public TLink Link { get; set; }

@@ -145,12 +145,13 @@
     <Compile Include="CustomerWindow.xaml.cs">
       <DependentUpon>CustomerWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Messages\Application\ActivateBusyIndicatorRequest.cs" />
-    <Compile Include="Messages\Application\DeActivateBusyIndicatorRequest.cs" />
-    <Compile Include="Messages\Application\NavigatorActivateScreenRequest.cs" />
-    <Compile Include="Messages\Application\NavigatorGoBackRequest.cs" />
-    <Compile Include="ServerApi\Extensions.cs" />
+    <Compile Include="INavigator.cs" />
+    <Compile Include="IShell.cs" />
+    <Compile Include="IUpdatableScreen.cs" />
+    <Compile Include="ServerApi\CQQ.cs" />
+    <Compile Include="ServerApi\ScreenActivationContext.cs" />
     <Compile Include="ServerApi\TForm.cs" />
+    <Compile Include="ServerApi\TitleAttribute.cs" />
     <Compile Include="ServerApi\TLink.cs" />
     <Compile Include="ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
@@ -162,13 +163,9 @@
     <Compile Include="Utils\HighlightTextOnFocus.cs" />
     <Compile Include="Utils\IMessageAggregator.cs" />
     <Compile Include="Utils\MessageAggregator.cs" />
-    <Compile Include="ServerApi\StatefulResponse.cs" />
     <Compile Include="Utils\LabelPrinter.cs" />
     <Compile Include="Utils\PosTextBox.cs" />
     <Compile Include="Utils\WatermarkService.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\PriceListItemViewModel.cs" />
-    <Compile Include="ViewModels\PriceListViewModel.cs" />
     <Compile Include="ViewModels\ProductItemViewModel.cs" />
     <Compile Include="ViewModels\ProductsViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />

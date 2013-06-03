@@ -9,7 +9,6 @@ using System.Net;
 using System.Net.Http;
 using System.Windows;
 using Caliburn.Micro;
-using POS.Messages.Application;
 using POS.ServerApi;
 using POS.Utils;
 using POS.ViewModels;
@@ -21,16 +20,16 @@ namespace POS
 
         CompositionContainer _container;
         public static IMessageAggregator _msg;
-        private StatefulHttpClient _httpClient;
+        //private StatefulHttpClient _httpClient;
         protected override void Configure()
         {
             _container = new CompositionContainer(new AggregateCatalog(AssemblySource.Instance.Select(x => new AssemblyCatalog(x))));
             var batch = new CompositionBatch();
-            var statefulHttpClient = new StatefulHttpClient(new HttpClient(), new CookieContainer());
+            //var statefulHttpClient = new StatefulHttpClient(new HttpClient(), new CookieContainer());
             var messageAggregator = new MessageAggregator();
             _msg = messageAggregator;
-            _httpClient = statefulHttpClient;
-            batch.AddExportedValue<StatefulHttpClient>(statefulHttpClient);
+            //_httpClient = statefulHttpClient;
+            //batch.AddExportedValue<INavigator>(statefulHttpClient);
             batch.AddExportedValue<IWindowManager>(new WindowManager());
             batch.AddExportedValue<IMessageAggregator>(messageAggregator);
             batch.AddExportedValue(_container);
@@ -60,13 +59,11 @@ namespace POS
         protected async override void OnStartup(object sender, StartupEventArgs e)
         {
             base.OnStartup(sender, e);
-
-            var data = new Dictionary<string, string>() { { "posisNomeri", ConfigurationManager.AppSettings["pos"] } };
-            var viewModel = await _httpClient.GetAsync(ConfigurationManager.AppSettings["host"])
-                                    .SubmitFormAsync("airchiePosi", data)
-                                    .GetScreenAsync();
-            _msg.Publish(new NavigatorActivateScreenRequest(viewModel));
-            //_msg.Publish(new NavigatorActivateScreenRequest(new MainViewModel()));
+            var shell = (ShellViewModel) this.GetInstance(typeof (ShellViewModel), null);
+            var statefulHttpClient = new StatefulHttpClient(new HttpClient(new HttpClientHandler(){AllowAutoRedirect = false}), new CookieContainer(), (IShell)shell);
+            shell.Navigator = statefulHttpClient;
+            var request = new HttpRequestMessage(HttpMethod.Get, ConfigurationManager.AppSettings["host"]);
+            statefulHttpClient.Navigate(request);
         }
     }
 }

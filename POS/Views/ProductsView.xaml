@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:l="clr-namespace:UIControls;assembly=UIControls"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-             xmlns:local="clr-namespace:POS.Utils"
+             xmlns:local="clr-namespace:POS.Utils" xmlns:WpfKb="clr-namespace:WpfKb.Controls;assembly=WpfKb"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Background="#CCFFFFFF">
+             d:DesignHeight="600" d:DesignWidth="800" Background="#CCFFFFFF">
     <Grid Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

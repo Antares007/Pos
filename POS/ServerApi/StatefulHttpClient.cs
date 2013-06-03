@@ -1,43 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using CsQuery;
 
 namespace POS.ServerApi
 {
-    public class StatefulHttpClient
+    public class StatefulHttpClient : INavigator
     {
+        private Uri _lastUri;
         private readonly HttpClient _client;
         private readonly CookieContainer _cookie;
-
-        public StatefulHttpClient(HttpClient client, CookieContainer cookie)
+        private readonly IShell _shell;
+        private readonly Stack<Uri> _stack = new Stack<Uri>();
+        public StatefulHttpClient(HttpClient client, CookieContainer cookie, IShell shell)
         {
             _client = client;
             _cookie = cookie;
+            _shell = shell;
         }
-        public async Task<StatefulResponse> SendAsync(HttpRequestMessage req)
+        public async Task<HttpResponseMessage> SendAsync(HttpRequestMessage req)
         {
             req.Headers.Add("Cookie", GetCookies(req.RequestUri));
             var res = await _client.SendAsync(req);
             SetCookies(res);
-            return ToStatefulResponse(res);
+            return res;
         }
 
-        private StatefulResponse ToStatefulResponse(HttpResponseMessage res)
-        {
-            return new StatefulResponse() { Message = res, Client = this };
-        }
-
-        public async Task<StatefulResponse> GetAsync(string uriString)
+        public async Task<HttpResponseMessage> GetAsync(string uriString)
         {
             var uri = new Uri(uriString);
             var req = new HttpRequestMessage(HttpMethod.Get, uri);
             req.Headers.Add("Cookie", GetCookies(uri));
             var res = await _client.SendAsync(req);
             SetCookies(res);
-            return ToStatefulResponse(res);
+            return res;
         }
 
         private void SetCookies(HttpResponseMessage res)
@@ -57,5 +58,49 @@ namespace POS.ServerApi
                .Where(c => !c.Expired)
                .Select(c => c.ToString());
         }
+
+        public async void Navigate(HttpRequestMessage request)
+        {
+            var response = await this.SendAsync(request);
+            CQ cq = await response.Content.ReadAsStringAsync();
+            var cqq = new CQQ(cq, Navigate);
+            var title = cq["head title"].First().Text();
+            if (title == "Home")
+            {
+                var form = cqq.GetForm("airchiePosi");
+                form["posisNomeri"] = ConfigurationManager.AppSettings["pos"];
+                form.Execute(null);
+                return;
+            }
+            var sc = response.StatusCode;
+            var redirected = sc == HttpStatusCode.TemporaryRedirect ||
+                sc == HttpStatusCode.Moved || sc == HttpStatusCode.MovedPermanently ||
+                sc == HttpStatusCode.Found;
+            if (redirected)
+            {
+                var req = new HttpRequestMessage(HttpMethod.Get,
+                                                 new Uri(response.RequestMessage.RequestUri,
+                                                         response.Headers.Location));
+                Navigate(req);
+                return;
+            }
+            var url = request.Method != HttpMethod.Get ? response.Headers.Location : request.RequestUri;
+
+            if (_lastUri != null && (_stack.Count == 0 || _stack.Peek() != request.RequestUri))
+                _stack.Push(_lastUri);
+            _lastUri = _lastUri == url ? null : url;
+            _shell.Show(new ScreenActivationContext(cqq, Navigate));
+        }
+
+        public void GoBack()
+        {
+            if (_stack.Count != 0)
+            {
+                _lastUri = null;
+                Navigate(new HttpRequestMessage(HttpMethod.Get, _stack.Pop()));
+            }
+        }
+
+        public bool CanGoBack { get { return _stack.Count != 0; } }
     }
 }

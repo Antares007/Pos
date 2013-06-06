@@ -109,7 +109,7 @@ namespace POS.ViewModels
             Barcode = cqq.GetText("a[rel='self']");
             Name = cqq.GetText(".dasakheleba");
             ExcelFileName = cqq.GetText(".partiebi .partia .shenishvna");
-            Price = cqq.GetForm("fasisShecvla");
+            Price = cqq.GetForm("#fasisShecvla");
             Eans = cqq.GetText(".eans .ean");
             Photos.Clear();
             Photos.AddRange(cqq.All("img", cqq1 => cqq1.GetAttr("src")));

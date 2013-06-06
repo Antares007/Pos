@@ -42,37 +42,39 @@ namespace WpfKb.Controls
         private Border _mouseDownSurface;
         private TextBlock _keyText;
 
-        private readonly GradientBrush _keySurfaceBrush = new LinearGradientBrush(
-            new GradientStopCollection
-                {
-                    new GradientStop(Color.FromRgb(56, 56, 56), 0),
-                    new GradientStop(Color.FromRgb(56, 56, 56), 0.6),
-                    new GradientStop(Color.FromRgb(26, 26, 26), 1)
-                }, 90);
+        private readonly SolidColorBrush _keySurfaceBrush = new SolidColorBrush(Color.FromRgb(00, 0XA8, 0XEC));
+        //new LinearGradientBrush(
+        //new GradientStopCollection
+        //    {
+        //        new GradientStop(Color.FromRgb(56, 56, 56), 0),
+        //        new GradientStop(Color.FromRgb(56, 56, 56), 0.6),
+        //        new GradientStop(Color.FromRgb(26, 26, 26), 1)
+        //    }, 90);
 
-        private readonly GradientBrush _keySurfaceBorderBrush = new LinearGradientBrush(
-            new GradientStopCollection
-                {
-                    new GradientStop(Color.FromRgb(200, 200, 200), 0),
-                    new GradientStop(Color.FromRgb(56, 56, 56), 1)
-                }, 90);
+        //private readonly GradientBrush _keySurfaceBorderBrush
+        //new LinearGradientBrush(
+        //new GradientStopCollection
+        //    {
+        //        new GradientStop(Color.FromRgb(200, 200, 200), 0),
+        //        new GradientStop(Color.FromRgb(56, 56, 56), 1)
+        //    }, 90);
 
-        private readonly GradientBrush _keySurfaceMouseOverBrush = new LinearGradientBrush(
-            new GradientStopCollection
-                {
-                    new GradientStop(Color.FromRgb(120, 120, 120), 0),
-                    new GradientStop(Color.FromRgb(120, 120, 120), 0.6),
-                    new GradientStop(Color.FromRgb(80, 80, 80), 1)
-                }, 90);
+        //private readonly GradientBrush _keySurfaceMouseOverBrush = new LinearGradientBrush(
+        //    new GradientStopCollection
+        //        {
+        //            new GradientStop(Color.FromRgb(120, 120, 120), 0),
+        //            new GradientStop(Color.FromRgb(120, 120, 120), 0.6),
+        //            new GradientStop(Color.FromRgb(80, 80, 80), 1)
+        //        }, 90);
 
-        private readonly GradientBrush _keySurfaceMouseOverBorderBrush = new LinearGradientBrush(
-            new GradientStopCollection
-                {
-                    new GradientStop(Color.FromRgb(255, 255, 255), 0),
-                    new GradientStop(Color.FromRgb(100, 100, 100), 1),
-                }, 90);
+        //private readonly GradientBrush _keySurfaceMouseOverBorderBrush = new LinearGradientBrush(
+        //    new GradientStopCollection
+        //        {
+        //            new GradientStop(Color.FromRgb(255, 255, 255), 0),
+        //            new GradientStop(Color.FromRgb(100, 100, 100), 1),
+        //        }, 90);
 
-        private readonly SolidColorBrush _keyOutsideBorderBrush = new SolidColorBrush(Color.FromArgb(255, 26, 26, 26));
+        //private readonly SolidColorBrush _keyOutsideBorderBrush = new SolidColorBrush(Color.FromArgb(255, 26, 26, 26));
 
 
 
@@ -117,9 +119,9 @@ namespace WpfKb.Controls
             get { return (GridLength)GetValue(GridWidthProperty); }
             set { SetValue(GridWidthProperty, value); }
         }
-        
 
-        
+
+
         protected static void OnKeyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             ((OnScreenKey)sender).SetupControl((ILogicalKey)e.NewValue);
@@ -192,41 +194,42 @@ namespace WpfKb.Controls
 
         private void SetupControl(ILogicalKey key)
         {
-            CornerRadius = new CornerRadius(3);
-            BorderBrush = _keyOutsideBorderBrush;
-            BorderThickness = new Thickness(1);
-            SnapsToDevicePixels = true;
+            // CornerRadius = new CornerRadius(3);
+            // BorderBrush = _keyOutsideBorderBrush;
+            // BorderThickness = new Thickness(1);
+            // SnapsToDevicePixels = true;
 
             var g = new Grid();
             Child = g;
 
             _keySurface = new Border
                               {
-                                  CornerRadius = new CornerRadius(3),
-                                  BorderBrush = _keySurfaceBorderBrush,
-                                  BorderThickness = new Thickness(1),
+                                  //CornerRadius = new CornerRadius(3),
+                                  //BorderBrush = _keySurfaceBorderBrush,
+                                  //BorderThickness = new Thickness(1),
                                   Background = _keySurfaceBrush,
-                                  SnapsToDevicePixels = true
+                                  Margin = new Thickness(2)
+                                  //SnapsToDevicePixels = true
                               };
             g.Children.Add(_keySurface);
 
             _mouseDownSurface = new Border
                                     {
-                                        CornerRadius = new CornerRadius(3),
+                                        //CornerRadius = new CornerRadius(3),
                                         Background = Brushes.White,
                                         Opacity = 0,
-                                        SnapsToDevicePixels = true
+                                        //SnapsToDevicePixels = true
                                     };
             g.Children.Add(_mouseDownSurface);
 
             _keyText = new TextBlock
                            {
                                Margin = new Thickness(3, 0, 0, 0),
-                               FontSize = 20,
-                               HorizontalAlignment = HorizontalAlignment.Left,
-                               VerticalAlignment = VerticalAlignment.Top,
+                               FontSize = 36,
+                               HorizontalAlignment = HorizontalAlignment.Center,
+                               VerticalAlignment = VerticalAlignment.Center,
                                Foreground = Brushes.White,
-                               SnapsToDevicePixels = true
+                               //SnapsToDevicePixels = true
                            };
             _keyText.SetBinding(TextBlock.TextProperty, new Binding("DisplayName") { Source = key });
             g.Children.Add(_keyText);
@@ -294,13 +297,13 @@ namespace WpfKb.Controls
         private void AnimateMouseDown()
         {
             _mouseDownSurface.BeginAnimation(OpacityProperty, new DoubleAnimation(1, new Duration(TimeSpan.Zero)));
-            _keyText.Foreground = _keyOutsideBorderBrush;
+            //_keyText.Foreground = _keyOutsideBorderBrush;
         }
 
         private void AnimateMouseUp()
         {
             if ((Key is TogglingModifierKey || Key is InstantaneousModifierKey) && ((ModifierKeyBase)Key).IsInEffect) return;
-            _keySurface.BorderBrush = _keySurfaceBorderBrush;
+           // _keySurface.BorderBrush = _keySurfaceBorderBrush;
             _keyText.Foreground = Brushes.White;
             if (!AreAnimationsEnabled || Key is TogglingModifierKey || Key is InstantaneousModifierKey)
             {
@@ -316,8 +319,8 @@ namespace WpfKb.Controls
         {
             if (IsMouseOverAnimationEnabled)
             {
-                _keySurface.Background = _keySurfaceMouseOverBrush;
-                _keySurface.BorderBrush = _keySurfaceMouseOverBorderBrush;
+               // _keySurface.Background = _keySurfaceMouseOverBrush;
+               // _keySurface.BorderBrush = _keySurfaceMouseOverBorderBrush;
             }
             base.OnMouseEnter(e);
         }
@@ -328,7 +331,7 @@ namespace WpfKb.Controls
             {
                 if (Key is TogglingModifierKey && ((ModifierKeyBase)Key).IsInEffect) return;
                 _keySurface.Background = _keySurfaceBrush;
-                _keySurface.BorderBrush = _keySurfaceBorderBrush;
+                //_keySurface.BorderBrush = _keySurfaceBorderBrush;
             }
             if (IsOnScreenKeyDown)
             {

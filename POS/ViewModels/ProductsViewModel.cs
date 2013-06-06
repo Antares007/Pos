@@ -16,7 +16,7 @@ namespace POS.ViewModels
         }
         public override void UpdateUi(ScreenActivationContext sac)
         {
-            Search = sac.Cqq.GetForm("dzebna");
+            Search = sac.Cqq.GetForm("#dzebna");
             Items.Clear();
             Items.AddRange(sac.Cqq.All("#produktebi .yvela .produkti",
                 cqq => new ProductItemViewModel()

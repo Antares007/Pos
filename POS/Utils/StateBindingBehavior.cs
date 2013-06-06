@@ -25,6 +25,8 @@ namespace POS.Utils
                         _dataContext = ((INotifyPropertyChanged)dataContext);
                         _dataContext.PropertyChanged += StateBindingBehavior_PropertyChanged;
                     }
+                    var stateName = _stateProperty.GetValue(_dataContext).ToString();
+                    VisualStateManager.GoToState(this.AssociatedObject, stateName, true);
                 };
 
         }

@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using POS.Utils;
 
 namespace POS
 {
@@ -8,9 +9,9 @@ namespace POS
         public ShellView()
         {
             InitializeComponent();
-            var customerWindow = new CustomerWindow() {DataContext = this, Left = 1024, Top = 0};
-            this.Loaded += (sender, args) => customerWindow.Show();
-            this.Closed += (sender, args) => customerWindow.Close();
+            //var customerWindow = new CustomerWindow() {DataContext = this, Left = 1024, Top = 0};
+            //this.Loaded += (sender, args) => customerWindow.Show();
+            this.Closed += (sender, args) => PosBootstrapper._msg.Publish(new ApplicationClosingEvent());
         }
     }
 }

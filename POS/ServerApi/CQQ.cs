@@ -17,11 +17,10 @@ namespace POS.ServerApi
 
         private readonly CQ _cq;
 
-        public TForm GetForm(string formId)
+        public TForm GetForm(string selector)
         {
-            return MakeTForm(formId, _action);
+            return MakeTForm(selector, _action);
         }
-
         public string GetText(string selector)
         {
             return _cq[selector].Text();
@@ -46,16 +45,17 @@ namespace POS.ServerApi
         {
             return _cq.Attr(attr);
         }
-        private TForm MakeTForm(string formId, Action<HttpRequestMessage> action)
+        private TForm MakeTForm(string selector, Action<HttpRequestMessage> action)
         {
-            var data = _cq["form#" + formId + " [name]"].Select(x => new
+            var data = _cq[selector + " [name]"].Select(x => new
             {
                 Name = x.Attributes["name"],
                 Value = x.Attributes["value"],
                 Required = x.Attributes["required"] != null
             }).ToList();
-            var href = _cq["form#" + formId].First().Attr("action");
-            var m = _cq["form#" + formId].First().Attr("method");
+            var form = _cq[selector].First();
+            var href = form.Attr("action");
+            var m = form.Attr("method");
             var method = m == "post" ? HttpMethod.Post : HttpMethod.Get;
             return new TForm(method, data.Where(x => x.Required).Select(x => x.Name), href, data.ToDictionary(x => x.Name, x => x.Value), action);
         }

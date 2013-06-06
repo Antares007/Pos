@@ -67,7 +67,7 @@ namespace POS.ServerApi
             var title = cq["head title"].First().Text();
             if (title == "Home")
             {
-                var form = cqq.GetForm("airchiePosi");
+                var form = cqq.GetForm("#airchiePosi");
                 form["posisNomeri"] = ConfigurationManager.AppSettings["pos"];
                 form.Execute(null);
                 return;

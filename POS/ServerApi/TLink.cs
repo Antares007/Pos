@@ -23,8 +23,10 @@ namespace POS.ServerApi
         public async void Execute(object parameter)
         {
             _transitLink(new HttpRequestMessage(HttpMethod.Get, new Uri(_url)));
+            OnExecuted.Invoke();
         }
 
         public event EventHandler CanExecuteChanged;
+        public event Action OnExecuted = delegate {};
     }
 }

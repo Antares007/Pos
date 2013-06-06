@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="BaseColor" Color="#FF00A8EC"/>
+    <SolidColorBrush x:Key="SecondaryColor" Color="#FFFF8500"/>
+	<SolidColorBrush x:Key="TeritaryColor" Color="#FFFE000D"/>
+    <SolidColorBrush x:Key="Quaternary" Color="#FF35B82E"/>
+	<ImageBrush x:Key="keyboardIcon" ImageSource="/Resources/Images/Icons/Keyboard.png"/>
+	<ImageBrush x:Key="backIcon" ImageSource="/Resources/Images/Icons/backIcon.png"/>
+	<ImageBrush x:Key="searchIcon" ImageSource="/Resources/Images/Icons/search.png"/>
+	<ImageBrush x:Key="anvol" ImageSource="/Resources/Images/Logos/anvol.png"/>
+	<ImageBrush x:Key="logo1" ImageSource="/Resources/Images/Logos/logo1.png"/>
+	<ImageBrush x:Key="logo2" ImageSource="/Resources/Images/Logos/logo2.png"/>
+    <ImageBrush x:Key="background" ImageSource="/Resources/Images/Backgrounds/1.jpg"/>
+</ResourceDictionary>

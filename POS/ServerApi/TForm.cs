@@ -14,7 +14,7 @@ namespace POS.ServerApi
         private readonly string _action;
         private readonly Action<HttpRequestMessage> _requestAction;
 
-        private IDictionary<string, string> _inner;
+        private readonly IDictionary<string, string> _inner;
 
         public TForm(HttpMethod method, IEnumerable<string> fields, string empty,Dictionary<string,string> inner, Action<HttpRequestMessage> requestAction)
         {

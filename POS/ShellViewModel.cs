@@ -26,7 +26,7 @@ namespace POS
             get { return _isKeyboardVisible; }
             set { _isKeyboardVisible = value; NotifyOfPropertyChange(() => IsKeyboardVisible); }
         }
-        public Visibility AreToolsVisible { get { return ConfigurationManager.AppSettings["pos"] == "pos1" ? Visibility.Collapsed : Visibility.Visible; } }
+        public Visibility AreToolsVisible { get { return ConfigurationManager.AppSettings["pos"] == "1" ? Visibility.Collapsed : Visibility.Visible; } }
 
         public INavigator Navigator { get; set; }
 

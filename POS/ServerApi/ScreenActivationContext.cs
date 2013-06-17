@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Reflection;
 using Caliburn.Micro;
-using CsQuery;
 using System.Linq;
 
 namespace POS.ServerApi
@@ -16,16 +15,16 @@ namespace POS.ServerApi
             .Select(t => new { Type = t, Title = t.GetCustomAttributes(typeof(TitleAttribute), true).FirstOrDefault() })
             .Where(x => x.Title != null).ToDictionary(arg => ((TitleAttribute)arg.Title).Name, arg => arg.Type), true);
 
-        public ScreenActivationContext(CQQ cq, Action<HttpRequestMessage> action)
+        public ScreenActivationContext( Jq jq, Action<HttpRequestMessage> action)
         {
-            Cqq = cq;
+            Jq = jq;
         }
 
-        public CQQ Cqq { get; set; }
+        public Jq Jq { get; private set; }
 
         public Type GetScreenType()
         {
-            var screenName = Cqq.GetText("head title");
+            var screenName = Jq.GetText("title");
             return Screens.Value[screenName];
         }
 

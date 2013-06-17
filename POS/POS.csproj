@@ -66,10 +66,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Caliburn.Micro.1.5.1\lib\net45\Caliburn.Micro.dll</HintPath>
     </Reference>
-    <Reference Include="CsQuery, Version=1.3.3.249, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CsQuery.1.3.4\lib\net40\CsQuery.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Expression.Effects" />
     <Reference Include="Microsoft.Expression.Interactions" />
@@ -77,6 +73,9 @@
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\packages\ServiceStack.Text.3.9.49\lib\net35\ServiceStack.Text.dll</HintPath>
+    </Reference>
     <Reference Include="SharpZebra">
       <HintPath>..\packages\SharpZebra.dll</HintPath>
     </Reference>
@@ -137,6 +136,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ServerApi\Jq.cs" />
     <Compile Include="Utils\ApplicationClosingEvent.cs" />
     <Compile Include="Utils\BindableDoubleAnimation.cs" />
     <Compile Include="Utils\InverseBool2VisibilityConverter.cs" />
@@ -161,7 +161,6 @@
     <Compile Include="INavigator.cs" />
     <Compile Include="IShell.cs" />
     <Compile Include="IUpdatableScreen.cs" />
-    <Compile Include="ServerApi\CQQ.cs" />
     <Compile Include="ServerApi\ScreenActivationContext.cs" />
     <Compile Include="ServerApi\TForm.cs" />
     <Compile Include="ServerApi\TitleAttribute.cs" />

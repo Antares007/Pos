@@ -16,15 +16,15 @@ namespace POS.ViewModels
         }
         public override void UpdateUi(ScreenActivationContext sac)
         {
-            Search = sac.Cqq.GetForm("#dzebna");
+            Search = sac.Jq.GetForm("dzebna");
             Items.Clear();
-            Items.AddRange(sac.Cqq.All("#produktebi .yvela .produkti",
+            Items.AddRange(sac.Jq.All("produktebi",
                 cqq => new ProductItemViewModel()
                     {
-                        Name = cqq.GetText(".dasakheleba"),
-                        Eans = cqq.GetText(".eans"),
-                        Photo = cqq.GetAttr(".image","src"),
-                        Open = cqq.GetLink("a")
+                        Name = cqq.GetText("dasakheleba"),
+                        Eans = cqq.GetText("eans"),
+                        Photo = cqq.GetText("img"),
+                        Open = cqq.GetLink("self")
                     }));
         }
     }

@@ -15,10 +15,11 @@ namespace POS.ViewModels
         public override void UpdateUi(ScreenActivationContext sac)
         {
            Items.Clear();
-           Items.AddRange(sac.Cqq.All("#suggestions .suggest", cqq => new SuggestionViewModel()
+           Items.AddRange(sac.Jq.All("suggestions", 
+               cqq => new SuggestionViewModel()
                {
-                   Name = cqq.GetText(),
-                   Link = cqq.GetLink()
+                   Name = cqq.GetText("suggest"),
+                   Link = cqq.GetLink("suggest")
                }));
         }
     }

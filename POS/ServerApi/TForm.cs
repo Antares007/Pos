@@ -10,24 +10,24 @@ namespace POS.ServerApi
     public class TForm : IDictionary<string, string>, ICommand
     {
         private readonly HttpMethod _method;
-        private readonly IEnumerable<string> _fields;
+        private readonly IEnumerable<string> _requiredFields;
         private readonly string _action;
         private readonly Action<HttpRequestMessage> _requestAction;
 
         private readonly IDictionary<string, string> _inner;
 
-        public TForm(HttpMethod method, IEnumerable<string> fields, string empty,Dictionary<string,string> inner, Action<HttpRequestMessage> requestAction)
+        public TForm(HttpMethod method, IEnumerable<string> requiredFields, string href,Dictionary<string,string> inner, Action<HttpRequestMessage> requestAction)
         {
             _method = method;
-            _fields = fields;
-            _action = empty;
+            _requiredFields = requiredFields;
+            _action = href;
             _inner = inner;
             _requestAction = requestAction;
         }
 
         public bool CanExecute(object parameter)
         {
-            return _fields.All(s => !string.IsNullOrWhiteSpace(this[s]));
+            return _requiredFields.All(s => !string.IsNullOrWhiteSpace(this[s]));
         }
 
         public void Execute(object parameter)

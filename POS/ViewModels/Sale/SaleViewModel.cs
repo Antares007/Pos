@@ -102,73 +102,73 @@ namespace POS.ViewModels.Sale
         }
         public override void UpdateUi(ScreenActivationContext sac)
         {
-            var cq = sac.Cqq;
-            cq.IsTitle("cheki", Print);
-            cq.IsTitle("gakidva", UpdateSaleViewModel);
-            cq.IsTitle("gadakhdisForma", ShowPaymentForm);
+            var jq = sac.Jq;
+            jq.IsTitle("cheki", Print);
+            jq.IsTitle("gakidva", UpdateSaleViewModel);
+            jq.IsTitle("gadakhdisForma", ShowPaymentForm);
         }
 
-        private void Print(CQQ cq)
+        private async  void Print(Jq cq)
         {
-            _receiptPrinter.PrintReceipt(cq);
-            cq.GetForm("#gamocera").Execute(null);
+            await _receiptPrinter.PrintReceipt(cq);
+            cq.GetForm("gamocera").Execute(null);
         }
 
-        private void ShowPaymentForm(CQQ cq)
+        private void ShowPaymentForm(Jq cq)
         {
-            PaymentForm = cq.GetForm("#gadakhdisForma");
+            PaymentForm = cq.GetForm("gadakhdisForma");
             ViewState = "Payment";
         }
 
-        private void UpdateSaleViewModel(CQQ cq)
+        private void UpdateSaleViewModel(Jq cq)
         {
             PaymentForms.Clear();
-            PaymentForms.AddRange(cq.All(".yvela .gadakhdisForma",
+            PaymentForms.AddRange(cq.All("gadakhdisFormebi",
                 cqq => new AmountItemViewModel()
             {
-                Link = cqq.GetLink("a"),
-                Name = cqq.GetText(".dasakheleba"),
-                Value = cqq.GetText("a"),
+                Link = cqq.GetLink("gadakhdisForma"),
+                Name = cqq.GetText("dasakheleba"),
+                Value = cqq.GetText("tankha"),
                 ViewState = "Plus"
             }));
             PaymentForms.Last().ViewState = "Equals";
             PaymentForms.Add(new AmountItemViewModel()
                 {
                     Name = "სულ გადახდილი",
-                    Value = cq.GetText(".sulMigebuliTankha"),
+                    Value = cq.GetText("sulMigebuliTankha"),
                     ViewState = "Minus"
                 });
             PaymentForms.Add(new AmountItemViewModel()
                 {
                     Name = "სულ გადასახდელი",
-                    Value = cq.GetText(".misagebiTankha"),
+                    Value = cq.GetText("misagebiTankha"),
                     ViewState = "Equals"
                 });
             PaymentForms.Add(new AmountItemViewModel()
             {
                 Name = "ხურდა",
-                Value = cq.GetText(".gasacemiTankha"),
+                Value = cq.GetText("gasacemiTankha"),
                 ViewState = "Normal"
             });
-            AddItem = cq.GetForm("#produktisDamateba");
-            Submit = cq.GetLink("a[rel='cheki']");
+            AddItem = cq.GetForm("produktisDamateba");
+            Submit = cq.GetLink("cheki");
             Submit.OnExecuted += () => IsToolVisible = false;
-            Func<CQQ, ItemViewModel> createItem = (q) =>
+            Func<Jq, ItemViewModel> createItem = (q) =>
                 new ItemViewModel()
                 {
-                    Id = q.GetText(".id"),
-                    Version = q.GetText(".versia"),
-                    Name = q.GetText(".dasakheleba"),
-                    Ean = q.GetText(".ean"),
-                    Reference = q.GetText(".ref"),
-                    Quantity = q.GetText(".raodenoba"),
-                    UnitPrice = q.GetText(".fasi"),
-                    TotalPrice = q.GetText(".jami"),
-                    Photo = q.GetAttr("img", "src"),
-                    Increase = q.GetForm(".momateba"),
-                    Decrease = q.GetForm(".mokleba")
+                    Id = q.GetText("id"),
+                    Version = q.GetText("versia"),
+                    Name = q.GetText("dasakheleba"),
+                    Ean = q.GetText("ean"),
+                    Reference = q.GetText("ref"),
+                    Quantity = q.GetText("raodenoba"),
+                    UnitPrice = q.GetText("fasi"),
+                    TotalPrice = q.GetText("jami"),
+                    Photo = q.GetText("img"),
+                    Increase = q.GetForm("momateba"),
+                    Decrease = q.GetForm("mokleba")
                 };
-            var itemViewModels = cq.All(".yvela .produkti", createItem).ToList();
+            var itemViewModels = cq.All("produktebi", createItem).ToList();
             var newItems = (from first in itemViewModels
                             from second in Items.Where(x => x.Id == first.Id).DefaultIfEmpty()
                             where second == null
@@ -188,7 +188,7 @@ namespace POS.ViewModels.Sale
         }
         protected override bool DoCanHandle(ScreenActivationContext sac)
         {
-            return sac.Cqq.IsTitle("gadakhdisForma") || sac.Cqq.IsTitle("cheki");
+            return sac.Jq.IsTitle("gadakhdisForma") || sac.Jq.IsTitle("cheki");
 
         }
         public void ItemMouseDown(object item)

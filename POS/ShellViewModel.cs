@@ -9,7 +9,6 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using Caliburn.Micro;
-using CsQuery;
 using POS.ServerApi;
 using POS.Utils;
 using System.Linq;
@@ -48,7 +47,7 @@ namespace POS
                 ((IUpdatableScreen)ActiveItem).UpdateUi(sac);
             else
                 this.ActivateItem(sac.GetScreen());
-        }
+        } 
         public void GoBack()
         {
             Navigator.GoBack();

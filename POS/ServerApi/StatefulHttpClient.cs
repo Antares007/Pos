@@ -5,8 +5,10 @@ using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using CsQuery;
+using ServiceStack.Text;
+using ServiceStack.Text.Json;
 
 namespace POS.ServerApi
 {
@@ -26,6 +28,7 @@ namespace POS.ServerApi
         public async Task<HttpResponseMessage> SendAsync(HttpRequestMessage req)
         {
             req.Headers.Add("Cookie", GetCookies(req.RequestUri));
+            req.Headers.Add("Accept", "application/json");
             var res = await _client.SendAsync(req);
             SetCookies(res);
             return res;
@@ -62,16 +65,7 @@ namespace POS.ServerApi
         public async void Navigate(HttpRequestMessage request)
         {
             var response = await this.SendAsync(request);
-            CQ cq = await response.Content.ReadAsStringAsync();
-            var cqq = new CQQ(cq, Navigate);
-            var title = cq["head title"].First().Text();
-            if (title == "Home")
-            {
-                var form = cqq.GetForm("#airchiePosi");
-                form["posisNomeri"] = ConfigurationManager.AppSettings["pos"];
-                form.Execute(null);
-                return;
-            }
+
             var sc = response.StatusCode;
             var redirected = sc == HttpStatusCode.TemporaryRedirect ||
                 sc == HttpStatusCode.Moved || sc == HttpStatusCode.MovedPermanently ||
@@ -84,12 +78,23 @@ namespace POS.ServerApi
                 Navigate(req);
                 return;
             }
+
+            var content = await response.Content.ReadAsStringAsync();
+            var jq = new Jq((JsonObject)JsonReader<JsonObject>.Parse(content), Navigate);
+            if (jq.GetText("title") == "Home")
+            {
+                TForm form = jq.GetForm("airchiePosi");
+                form["posisNomeri"] = ConfigurationManager.AppSettings["pos"];
+                form.Execute(null);
+                return;
+            }
+
             var url = request.Method != HttpMethod.Get ? response.Headers.Location : request.RequestUri;
 
             if (_lastUri != null && (_stack.Count == 0 || _stack.Peek() != request.RequestUri))
                 _stack.Push(_lastUri);
             _lastUri = _lastUri == url ? null : url;
-            _shell.Show(new ScreenActivationContext(cqq, Navigate));
+            _shell.Show(new ScreenActivationContext(jq, Navigate));
         }
 
         public void GoBack()

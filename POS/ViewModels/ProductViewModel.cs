@@ -104,22 +104,24 @@ namespace POS.ViewModels
 
         public override void UpdateUi(ScreenActivationContext sac)
         {
-            var cqq = sac.Cqq;
-            Id = cqq.GetText(".partiebi .partia .id");
-            Barcode = cqq.GetText("a[rel='self']");
-            Name = cqq.GetText(".dasakheleba");
-            ExcelFileName = cqq.GetText(".partiebi .partia .shenishvna");
-            Price = cqq.GetForm("#fasisShecvla");
-            Eans = cqq.GetText(".eans .ean");
+            var cqq = sac.Jq;
+            Id = cqq.GetText("ref");
+            Barcode = cqq.GetText("ref");
+            Name = cqq.GetText("dasakheleba");
+            ExcelFileName = "";
+            Price = cqq.GetForm("fasisShecvla");
+            Eans = "";
             Photos.Clear();
-            Photos.AddRange(cqq.All("img", cqq1 => cqq1.GetAttr("src")));
+            Photos.Add(cqq.GetText("img"));
+
             NotifyOfPropertyChange(() => ActivePhoto);
             References.Clear();
-            References.AddRange(cqq.All(".eans .ref", cqq1 => new ReferenceViewModel()
+            References.AddRange(cqq.All("eans",
+                cqq1 => cqq1.All("refs", q => new ReferenceViewModel()
                 {
-                    Barcode = cqq1.GetText(),
-                    Open = cqq1.GetLink(),
-                }));
+                    Barcode = q.GetText("ref"),
+                    Open = q.GetLink("self"),
+                })).SelectMany(x => x));
         }
     }
 }

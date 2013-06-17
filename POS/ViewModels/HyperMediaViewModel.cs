@@ -13,7 +13,7 @@ namespace POS.ViewModels
         public bool CanHandle(ScreenActivationContext sac)
         {
             var attribute = this.GetType().GetAttributes<TitleAttribute>(false).First();
-            var result = sac.Cqq.IsTitle(attribute.Name);
+            var result = sac.Jq.IsTitle(attribute.Name);
             return result || DoCanHandle(sac);
         }
 

@@ -3,7 +3,7 @@ using POS.ServerApi;
 
 namespace POS.ViewModels.Sale
 {
-    public class ItemViewModel:Screen
+    public class ItemViewModel : Screen
     {
         private string _quantity;
         private string _unitPrice;
@@ -11,10 +11,12 @@ namespace POS.ViewModels.Sale
         private TForm _increase;
         private TForm _decrease;
         private string _version;
+        private string _discountedTotalPrice;
+        private bool _hasDiscount;
 
         public ItemViewModel()
         {
-            
+
         }
         public string Name { get; set; }
 
@@ -27,7 +29,7 @@ namespace POS.ViewModels.Sale
             get { return _quantity; }
             set
             {
-                _quantity = value;NotifyOfPropertyChange(()=>Quantity);
+                _quantity = value; NotifyOfPropertyChange(() => Quantity);
             }
         }
 
@@ -65,6 +67,16 @@ namespace POS.ViewModels.Sale
             set { _version = value; NotifyOfPropertyChange(() => Version); }
         }
 
+        public string DiscountedTotalPrice
+        {
+            get { return _discountedTotalPrice; }
+            set { _discountedTotalPrice = value; NotifyOfPropertyChange(() => DiscountedTotalPrice); }
+        }
+        public bool HasDiscount
+        {
+            get { return TotalPrice != DiscountedTotalPrice; }
+        }
+
         public void Update(ItemViewModel n)
         {
             Quantity = n.Quantity;
@@ -73,6 +85,8 @@ namespace POS.ViewModels.Sale
             Increase = n.Increase;
             Decrease = n.Decrease;
             Version = n.Version;
+            DiscountedTotalPrice = n.DiscountedTotalPrice;
+            NotifyOfPropertyChange(() => HasDiscount);
         }
     }
 }

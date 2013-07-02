@@ -15,54 +15,54 @@
         <Utils:InverseBool2VisibilityConverter x:Key="InverseBool2Visibility"/>
         <BooleanToVisibilityConverter x:Key="Bool2Visibility"/>
     </UserControl.Resources>
-	<i:Interaction.Behaviors>
-		<Utils:StateBindingBehavior/>
-	</i:Interaction.Behaviors>
-	<Grid Background="Transparent">
-		<VisualStateManager.VisualStateGroups>
-			<VisualStateGroup x:Name="VisualStateGroup">
-				<VisualState x:Name="Normal"/>
-				<VisualState x:Name="Plus">
-					<Storyboard>
-						<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="PlusSign">
-							<DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
-						</ObjectAnimationUsingKeyFrames>
-					</Storyboard>
-				</VisualState>
-				<VisualState x:Name="Minus">
-					<Storyboard>
-						<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="MinusSign">
-							<DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
-						</ObjectAnimationUsingKeyFrames>
-					</Storyboard>
-				</VisualState>
-				<VisualState x:Name="Equals">
-					<Storyboard>
-						<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="EqualsLine">
-							<DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
-						</ObjectAnimationUsingKeyFrames>
-						<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="Uc">
-							<EasingThicknessKeyFrame KeyTime="0" Value="0,0,0,10"/>
-						</ThicknessAnimationUsingKeyFrames>
-                        
-					</Storyboard>
-				</VisualState>
-			</VisualStateGroup>
-		</VisualStateManager.VisualStateGroups>
-		<i:Interaction.Triggers>
-			<i:EventTrigger EventName="MouseLeftButtonDown">
-				<i:InvokeCommandAction Command="{Binding Link}"/>
-			</i:EventTrigger>
-		</i:Interaction.Triggers>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="10*"/>
-			<ColumnDefinition Width="*"/>
-		</Grid.ColumnDefinitions>
-		<Grid x:Name="Data" Grid.ColumnSpan="2" Margin="2">
+    <i:Interaction.Behaviors>
+        <Utils:StateBindingBehavior/>
+    </i:Interaction.Behaviors>
+    <Grid Background="Transparent">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="Normal"/>
+                <VisualState x:Name="Plus">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="PlusSign">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Minus">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="MinusSign">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Equals">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="EqualsLine">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="Uc">
+                            <EasingThicknessKeyFrame KeyTime="0" Value="0,0,0,10"/>
+                        </ThicknessAnimationUsingKeyFrames>
+
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="MouseLeftButtonDown">
+                <i:InvokeCommandAction Command="{Binding Link}"/>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="Data" Grid.ColumnSpan="2" Margin="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3.3*"/>
                 <ColumnDefinition Width="*"/>
@@ -80,42 +80,54 @@
                 <TextBlock VerticalAlignment="Center"
                            x:Name="Value"  HorizontalAlignment="Right" 
                            TextAlignment="Right"/>
+                <Grid Visibility="{Binding HasValue2,Converter={StaticResource Bool2Visibility}}">
+                    <Rectangle HorizontalAlignment="Stretch" 
+                           VerticalAlignment="Center" 
+                           Height="1" Fill="Red"/>
+                    <TextBlock VerticalAlignment="Center"
+                           x:Name="Value2" Foreground="Red" HorizontalAlignment="Right" 
+                           TextAlignment="Right">
+                        <TextBlock.RenderTransform>
+                            <TranslateTransform Y="-15"/>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                </Grid>
             </Grid>
-		</Grid>
+        </Grid>
         <Grid x:Name="EqualsLine"  Grid.Row="1" VerticalAlignment="Bottom" Visibility="Collapsed">
             <Rectangle Height="2" Margin="0,4,0,0" Fill="{DynamicResource BaseColor}"/>
-		</Grid>
+        </Grid>
         <Grid x:Name="PlusSign" Grid.Column="1" Grid.Row="1" Visibility="Collapsed" RenderTransformOrigin="0.5,0.5">
-        	<Grid.RenderTransform>
-        		<TransformGroup>
-        			<ScaleTransform/>
-        			<SkewTransform/>
-        			<RotateTransform/>
-        			<TranslateTransform X="-15"/>
-        		</TransformGroup>
-        	</Grid.RenderTransform>
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform X="-15"/>
+                </TransformGroup>
+            </Grid.RenderTransform>
             <Rectangle Margin="4" Height="2" Fill="{DynamicResource BaseColor}"/>
             <Rectangle Margin="4" Height="2" Fill="{DynamicResource BaseColor}" RenderTransformOrigin="0.5,0.5">
-				<Rectangle.RenderTransform>
-					<TransformGroup>
-						<ScaleTransform/>
-						<SkewTransform/>
-						<RotateTransform Angle="90"/>
-						<TranslateTransform/>
-					</TransformGroup>
-				</Rectangle.RenderTransform>
-			</Rectangle>
-		</Grid>
-		<Grid x:Name="MinusSign" Grid.Column="1" Grid.Row="1" Visibility="Collapsed" RenderTransformOrigin="0.5,0.5">
-			<Grid.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform X="-15"/>
-				</TransformGroup>
-			</Grid.RenderTransform>
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="90"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+        </Grid>
+        <Grid x:Name="MinusSign" Grid.Column="1" Grid.Row="1" Visibility="Collapsed" RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform X="-15"/>
+                </TransformGroup>
+            </Grid.RenderTransform>
             <Rectangle Margin="4" Height="2" Fill="{DynamicResource BaseColor}"/>
-		</Grid>
-	</Grid>
+        </Grid>
+    </Grid>
 </UserControl>

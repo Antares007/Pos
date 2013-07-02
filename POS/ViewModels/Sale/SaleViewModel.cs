@@ -142,6 +142,7 @@ namespace POS.ViewModels.Sale
                 {
                     Name = "სულ გადასახდელი",
                     Value = cq.GetText("misagebiTankha"),
+                    Value2 = cq.GetText("fasdaklebuliMisagebiTankha"),
                     ViewState = "Equals"
                 });
             PaymentForms.Add(new AmountItemViewModel()
@@ -162,8 +163,9 @@ namespace POS.ViewModels.Sale
                     Ean = q.GetText("ean"),
                     Reference = q.GetText("ref"),
                     Quantity = q.GetText("raodenoba"),
-                    UnitPrice = q.GetText("fasi"),
+                    UnitPrice = q.GetText("fasdaklebuliFasi"),
                     TotalPrice = q.GetText("jami"),
+                    DiscountedTotalPrice = q.GetText("fasdaklebuliJami"),
                     Photo = q.GetText("img"),
                     Increase = q.GetForm("momateba"),
                     Decrease = q.GetForm("mokleba")

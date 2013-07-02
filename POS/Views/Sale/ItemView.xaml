@@ -12,6 +12,9 @@
              BorderThickness="1" BorderBrush="{DynamicResource BaseColor}"
              TextBlock.Foreground="{DynamicResource BaseColor}"
              Height="200" Width="200">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="bool2visibility"/>
+    </UserControl.Resources>
 	<Grid Background="#7FFFFFFF">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
@@ -32,69 +35,23 @@
 				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
-			<TextBlock TextAlignment="Right" VerticalAlignment="Bottom" Text="{Binding Quantity, NotifyOnTargetUpdated=True}" x:Name="Qty" RenderTransformOrigin="0.5,0.5">
-				<!--<TextBlock.RenderTransform>
-					<TransformGroup>
-						<ScaleTransform/>
-						<SkewTransform/>
-						<RotateTransform/>
-						<TranslateTransform/>
-					</TransformGroup>
-				</TextBlock.RenderTransform>
-				<TextBlock.Triggers>
-					<EventTrigger RoutedEvent="Binding.TargetUpdated">
-						<BeginStoryboard>
-							<Storyboard>
-								<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Qty">
-									<EasingColorKeyFrame KeyTime="0:0:0.1" Value="Red"/>
-									<EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FF00A8EC"/>
-								</ColorAnimationUsingKeyFrames>
-								<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="Qty">
-									<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1.2"/>
-									<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
-								</DoubleAnimationUsingKeyFrames>
-								<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="Qty">
-									<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1.2"/>
-									<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
-								</DoubleAnimationUsingKeyFrames>
-							</Storyboard>
-						</BeginStoryboard>
-					</EventTrigger>
-				</TextBlock.Triggers>-->
-			</TextBlock>
+			<TextBlock TextAlignment="Right" VerticalAlignment="Bottom" Text="{Binding Quantity, NotifyOnTargetUpdated=True}" x:Name="Qty" RenderTransformOrigin="0.5,0.5"/>
 			<TextBlock TextAlignment="Center" VerticalAlignment="Bottom" Grid.Column="1" Text=" x "/>
 			<TextBlock TextAlignment="Left" VerticalAlignment="Bottom" Grid.Column="2" x:Name="UnitPrice"/>
 			<TextBlock TextAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Text=" = "/>
-			<TextBlock VerticalAlignment="Top" TextAlignment="Center" Text="{Binding TotalPrice, NotifyOnTargetUpdated=True}" x:Name="TotPrice" Grid.Column="4" >
-				<!--<TextBlock.RenderTransform>
-					<TransformGroup>
-						<ScaleTransform/>
-						<SkewTransform/>
-						<RotateTransform/>
-						<TranslateTransform/>
-					</TransformGroup>
-				</TextBlock.RenderTransform>
-				<TextBlock.Triggers>
-					<EventTrigger RoutedEvent="Binding.TargetUpdated">
-						<BeginStoryboard>
-							<Storyboard>
-								<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="TotPrice">
-									<EasingColorKeyFrame KeyTime="0:0:0.1" Value="Red"/>
-									<EasingColorKeyFrame KeyTime="0:0:0.3" Value="#FF00A8EC"/>
-								</ColorAnimationUsingKeyFrames>
-								<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="TotPrice">
-									<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1.2"/>
-									<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
-								</DoubleAnimationUsingKeyFrames>
-								<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="TotPrice">
-									<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1.2"/>
-									<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
-								</DoubleAnimationUsingKeyFrames>
-							</Storyboard>
-						</BeginStoryboard>
-					</EventTrigger>
-				</TextBlock.Triggers>-->
-			</TextBlock>
+			<TextBlock VerticalAlignment="Top" TextAlignment="Center" Text="{Binding TotalPrice, NotifyOnTargetUpdated=True}" x:Name="TotPrice" Grid.Column="4" />	
+            <Grid Grid.Column="4" Visibility="{Binding HasDiscount,Converter={StaticResource bool2visibility}}">
+                <Rectangle HorizontalAlignment="Stretch" 
+                           VerticalAlignment="Center" 
+                           Height="1" Fill="Red"/>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Foreground="Red"
+                           Text="{Binding DiscountedTotalPrice, NotifyOnTargetUpdated=True}">
+                    <TextBlock.RenderTransform>
+                        <TranslateTransform Y="-15"/>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+            </Grid>
 		</Grid>
 	</Grid>
 </UserControl>

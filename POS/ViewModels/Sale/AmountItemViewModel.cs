@@ -18,7 +18,7 @@ namespace POS.ViewModels.Sale
         public bool HasLink { get { return Link != null; } }
         public bool HasValue2
         {
-            get { return !string.IsNullOrEmpty(Value2); }
+            get { return Value != Value2 && Value2 != null; }
         }
     }
 }

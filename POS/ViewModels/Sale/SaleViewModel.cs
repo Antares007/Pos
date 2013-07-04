@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
@@ -86,6 +87,20 @@ namespace POS.ViewModels.Sale
                                 .Select(x => this.ViewState);
             var normal = pco.Where(x => x == "Normal").Select(x => Unit.Default);
             var other = pco.Where(x => x != "Normal").Select(x => Unit.Default);
+            Scanner.ObservableKeys
+                   .SkipUntil(pco.Where(x => x == "Payment"))
+                   .Where(c => char.IsNumber(c) || (int)c == 27)
+                   .TakeUntil(pco.Where(x => x != "Payment"))
+                   .Scan("", (s, c) => c == 27 ? "" : s + c)
+                   .Repeat()
+                   .Subscribe(x =>
+                       {
+                           if (string.IsNullOrWhiteSpace(x))
+                               PaymentForm["mnishvneloba"] = "0.00";
+                           else
+                               PaymentForm["mnishvneloba"] = String.Format("{0:0.00}", (decimal.Parse(x) / 100));
+                           NotifyOfPropertyChange(() => PaymentForm);
+                       });
 
             Scanner.ObservableKeys
                 .Where(x => !char.IsWhiteSpace(x))
@@ -108,7 +123,7 @@ namespace POS.ViewModels.Sale
             jq.IsTitle("gadakhdisForma", ShowPaymentForm);
         }
 
-        private async  void Print(Jq cq)
+        private async void Print(Jq cq)
         {
             await _receiptPrinter.PrintReceipt(cq);
             cq.GetForm("gamocera").Execute(null);

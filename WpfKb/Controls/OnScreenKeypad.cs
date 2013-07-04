@@ -20,12 +20,9 @@ namespace WpfKb.Controls
                            new OnScreenKey { GridRow = 2, GridColumn = 0, Key = new VirtualKey(VirtualKeyCode.VK_1, "1") },
                            new OnScreenKey { GridRow = 2, GridColumn = 1, Key = new VirtualKey(VirtualKeyCode.VK_2, "2") },
                            new OnScreenKey { GridRow = 2, GridColumn = 2, Key = new VirtualKey(VirtualKeyCode.VK_3, "3") },
-                           new OnScreenKey { GridRow = 3, GridColumn = 0, Key = new StringKey("00","00") },
+                           new OnScreenKey { GridRow = 3, GridColumn = 0, Key = new ChordKey("00",null,new List<VirtualKeyCode>(){VirtualKeyCode.VK_0,VirtualKeyCode.VK_0}) },
                            new OnScreenKey { GridRow = 3, GridColumn = 1, Key = new VirtualKey(VirtualKeyCode.VK_0, "0") },
-                           new OnScreenKey { GridRow = 3, GridColumn = 2, Key = new ChordKey("C",VirtualKeyCode.LCONTROL, 
-                                                                                        new List<VirtualKeyCode>(){
-                                                                                            VirtualKeyCode.VK_A,
-                                                                                            VirtualKeyCode.DELETE}) }, 
+                           new OnScreenKey { GridRow = 3, GridColumn = 2, Key = new VirtualKey(VirtualKeyCode.ESCAPE, "C") }, 
                        };
         }
     }

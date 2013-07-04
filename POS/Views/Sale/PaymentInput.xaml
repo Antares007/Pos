@@ -16,9 +16,9 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="Input" VerticalContentAlignment="Center"
-                 Text="{Binding PaymentForm[mnishvneloba], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                 Margin="2,2,2,0" FontSize="36"/>
+                <TextBlock x:Name="Input" Background="White" Padding="12,0,0,0"
+                         Text="{Binding PaymentForm[mnishvneloba], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                         Margin="2,2,2,0" FontSize="44"/>
                 <Button 
                 Content="OK" Grid.Column="1"
                 Grid.Row="2" BorderThickness="0" BorderBrush="{x:Null}" Margin="2,2,2,0"

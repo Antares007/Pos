@@ -77,14 +77,14 @@
             <Grid Grid.Column="1">
                 <Border BorderBrush="{DynamicResource BaseColor}" Visibility="{Binding HasLink,Converter={StaticResource Bool2Visibility}}" BorderThickness="1" >
                 </Border>
-                <TextBlock VerticalAlignment="Center"
+                <TextBlock VerticalAlignment="Center" Margin="0,0,4,0"
                            x:Name="Value"  HorizontalAlignment="Right" 
                            TextAlignment="Right"/>
                 <Grid Visibility="{Binding HasValue2,Converter={StaticResource Bool2Visibility}}">
                     <Rectangle HorizontalAlignment="Stretch" 
                            VerticalAlignment="Center" 
                            Height="1" Fill="Red"/>
-                    <TextBlock VerticalAlignment="Center"
+                    <TextBlock VerticalAlignment="Center" Margin="0,0,2,0"
                            x:Name="Value2" Foreground="Red" HorizontalAlignment="Right" 
                            TextAlignment="Right">
                         <TextBlock.RenderTransform>

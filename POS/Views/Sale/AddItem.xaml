@@ -18,9 +18,15 @@
 				<ColumnDefinition Width="*"/>
 				<ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
-            <TextBox  x:Name="ItemCode" Text="{Binding AddItem[kodi], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="4" FontSize="37"/>
-			<Button Content="დამატება" Command="{Binding AddItem}" Grid.Column="1" Margin="4" Padding="16" FontSize="21.333"/>
+            <TextBox  x:Name="ItemCode" Text="{Binding AddItem[kodi], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="72,8,2,0" FontSize="30"/>
+			<Button Content="დამატება"
+                    Command="{Binding AddItem}"
+                    Grid.Column="1" 
+                    Margin="2,8,8,0"
+                    Padding="4,16,4,15" FontWeight="Bold" Foreground="White"
+                    FontSize="23.2" Style="{DynamicResource PaymentSubmitButtonStyle}"
+                    HorizontalAlignment="Stretch"/>
 		</Grid>
-		<Controls:OnScreenKeyboard Grid.Row="1"/>
+		<Controls:OnScreenKeyboard Style="{DynamicResource KeyboardStyle}" Grid.Row="1"/>
 	</Grid>
 </UserControl>

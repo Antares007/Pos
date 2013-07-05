@@ -166,7 +166,9 @@
         <Grid x:Name="KeyboardOverlay" Grid.ColumnSpan="2" Background="#00000000" Visibility="Collapsed">
         	<i:Interaction.Triggers>
         		<i:EventTrigger EventName="MouseLeftButtonDown">
-        			<ei:GoToStateAction StateName="Normal"/>
+                    <cal:ActionMessage MethodName="KeyboardOverlayMouseDown">
+                        <cal:Parameter Value="$eventArgs"/>
+                    </cal:ActionMessage>
         		</i:EventTrigger>
         	</i:Interaction.Triggers>
             <local:PaymentInput Visibility="Collapsed" x:Name="PaymentInput" DataContext="{Binding}">

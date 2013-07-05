@@ -6,10 +6,12 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Media.Animation;
 using Caliburn.Micro;
 using POS.ServerApi;
 using POS.ViewModels.Sale.Printing;
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace POS.ViewModels.Sale
 {
@@ -235,6 +237,17 @@ namespace POS.ViewModels.Sale
         {
             get { return _isToolVisible; }
             set { _isToolVisible = value; NotifyOfPropertyChange(() => IsToolVisible); }
+        }
+        public void KeyboardOverlayMouseDown(RoutedEventArgs args)
+        {
+            var grid = args.OriginalSource as Grid;
+            if (grid == null || grid.Name != "KeyboardOverlay") return;
+            if (ViewState == "AddItem")
+            {
+                AddItem["kodi"] = string.Empty;
+                NotifyOfPropertyChange(() => AddItem);
+            }
+            ViewState = "Normal";
         }
     }
 }

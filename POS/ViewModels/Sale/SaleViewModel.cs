@@ -213,6 +213,7 @@ namespace POS.ViewModels.Sale
             return sac.Jq.IsTitle("gadakhdisForma") || sac.Jq.IsTitle("cheki");
 
         }
+
         public void ItemMouseDown(object item)
         {
             var itemViewModel = (ItemViewModel)item;

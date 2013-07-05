@@ -10,7 +10,7 @@
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" 
              xmlns:ee="http://schemas.microsoft.com/expression/2010/effects"
              xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
-             x:Class="POS.Views.Sale.SaleView"
+             x:Class="POS.Views.Sale.SaleView" x:Name="SaleViewUc"
              mc:Ignorable="d"
              d:DesignHeight="766" d:DesignWidth="1024">
     <UserControl.Resources>
@@ -129,6 +129,7 @@
                     <ItemsPanelTemplate>
                         <WrapPanel>
                             <i:Interaction.Behaviors>
+                                <utils:SizeDependentItemsBehavior ItemsInRow="3"/>
                                 <ei:FluidMoveBehavior AppliesTo="Children" Duration="0:0:1">
                                     <ei:FluidMoveBehavior.EaseY>
                                         <CircleEase EasingMode="EaseInOut"/>
@@ -164,13 +165,13 @@
                                         DataContext="{Binding}"/>
         </Canvas>
         <Grid x:Name="KeyboardOverlay" Grid.ColumnSpan="2" Background="#00000000" Visibility="Collapsed">
-        	<i:Interaction.Triggers>
-        		<i:EventTrigger EventName="MouseLeftButtonDown">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
                     <cal:ActionMessage MethodName="KeyboardOverlayMouseDown">
                         <cal:Parameter Value="$eventArgs"/>
                     </cal:ActionMessage>
-        		</i:EventTrigger>
-        	</i:Interaction.Triggers>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <local:PaymentInput Visibility="Collapsed" x:Name="PaymentInput" DataContext="{Binding}">
                 <local:PaymentInput.RenderTransform>
                     <TranslateTransform Y="0"/>

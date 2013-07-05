@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              BorderBrush="{DynamicResource TeritaryColor}" 
              BorderThickness="2">
-    <Grid Height="196" Width="196" Canvas.Left="0" Canvas.Top="0">
+    <Grid Canvas.Left="0" Canvas.Top="0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="40*"/>
             <ColumnDefinition Width="160*"/>

@@ -10,8 +10,7 @@
              mc:Ignorable="d" Margin="4"
              cal:Message.Attach="[Event PreviewMouseLeftButtonDown] = [Action ItemMouseDown($this)]"
              BorderThickness="1" BorderBrush="{DynamicResource BaseColor}"
-             TextBlock.Foreground="{DynamicResource BaseColor}"
-             Height="200" Width="200">
+             TextBlock.Foreground="{DynamicResource BaseColor}">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="bool2visibility"/>
     </UserControl.Resources>

@@ -6,8 +6,7 @@
 	xmlns:Controls="clr-namespace:WpfKb.Controls;assembly=WpfKb"
 	mc:Ignorable="d"
 	x:Class="POS.Views.Sale.AddItem"
-	x:Name="UserControl"
-	d:DesignWidth="800" d:DesignHeight="350">
+	Width="900" Height="400">
 
 	<Grid x:Name="LayoutRoot">
 		<Grid.RowDefinitions>
@@ -19,8 +18,8 @@
 				<ColumnDefinition Width="*"/>
 				<ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
-			<TextBox Text="{Binding AddItem[kodi], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="4" FontSize="37"/>
-			<Button Content="ძებნა" Grid.Column="1" Margin="4" Padding="16" FontSize="21.333"/>
+            <TextBox  x:Name="ItemCode" Text="{Binding AddItem[kodi], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="4" FontSize="37"/>
+			<Button Content="დამატება" Command="{Binding AddItem}" Grid.Column="1" Margin="4" Padding="16" FontSize="21.333"/>
 		</Grid>
 		<Controls:OnScreenKeyboard Grid.Row="1"/>
 	</Grid>

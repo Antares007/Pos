@@ -188,6 +188,9 @@
     <Compile Include="ViewModels\Sale\SaleViewModel.cs" />
     <Compile Include="ViewModels\SuggestionsViewModel.cs" />
     <Compile Include="ViewModels\HyperMediaViewModel.cs" />
+    <Compile Include="Views\Sale\AddItem.xaml.cs">
+      <DependentUpon>AddItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Sale\IncreaseDecreaseTool.xaml.cs">
       <DependentUpon>IncreaseDecreaseTool.xaml</DependentUpon>
     </Compile>

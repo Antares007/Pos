@@ -9,6 +9,7 @@
              xmlns:local="clr-namespace:POS.Views.Sale"
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" 
              xmlns:ee="http://schemas.microsoft.com/expression/2010/effects"
+             xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
              x:Class="POS.Views.Sale.SaleView"
              mc:Ignorable="d"
              d:DesignHeight="766" d:DesignWidth="1024">
@@ -47,7 +48,17 @@
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UserControl.Visibility)" Storyboard.TargetName="PaymentInput">
                             <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}"/>
                         </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UserControl.Visibility)" Storyboard.TargetName="AddItemUc">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}"/>
+                        </ObjectAnimationUsingKeyFrames>
                         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" Storyboard.TargetName="PaymentInput">
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="800">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <CubicEase EasingMode="EaseIn"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" Storyboard.TargetName="AddItemUc">
                             <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="800">
                                 <EasingDoubleKeyFrame.EasingFunction>
                                     <CubicEase EasingMode="EaseIn"/>
@@ -77,7 +88,27 @@
                         </DoubleAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
-                <VisualState x:Name="Input"/>
+                <VisualState x:Name="AddItem">
+                    <Storyboard>
+                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="KeyboardOverlay">
+                            <EasingColorKeyFrame KeyTime="0" Value="#00000000"/>
+                            <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#7F000000"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="KeyboardOverlay">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UserControl.Visibility)" Storyboard.TargetName="AddItemUc">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" Storyboard.TargetName="AddItemUc">
+                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
+                                <EasingDoubleKeyFrame.EasingFunction>
+                                    <CubicEase EasingMode="EaseOut"/>
+                                </EasingDoubleKeyFrame.EasingFunction>
+                            </EasingDoubleKeyFrame>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
                 <VisualState x:Name="Error"/>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
@@ -111,6 +142,7 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
+            <Button Style="{DynamicResource ShowKeyboardButtonStyle}" Width="80" Height="72" Margin="8"  cal:Message.Attach="ShowAddItem"  Grid.Row="1" HorizontalAlignment="Right"/>
         </Grid>
         <Grid Margin="4,8,8,8" Background="#CCFFFFFF" Grid.Column="1">
             <Grid.RowDefinitions>
@@ -125,7 +157,6 @@
 				Foreground="White"
 				FontSize="29"/>
         </Grid>
-        <local:AddItem Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
         <Canvas>
             <local:IncreaseDecreaseTool Canvas.Left="0" Canvas.Top="0"
                                         Visibility="{Binding IsToolVisible,Converter={StaticResource Bool2Visibility}}"
@@ -133,11 +164,21 @@
                                         DataContext="{Binding}"/>
         </Canvas>
         <Grid x:Name="KeyboardOverlay" Grid.ColumnSpan="2" Background="#00000000" Visibility="Collapsed">
+        	<i:Interaction.Triggers>
+        		<i:EventTrigger EventName="MouseLeftButtonDown">
+        			<ei:GoToStateAction StateName="Normal"/>
+        		</i:EventTrigger>
+        	</i:Interaction.Triggers>
             <local:PaymentInput Visibility="Collapsed" x:Name="PaymentInput" DataContext="{Binding}">
                 <local:PaymentInput.RenderTransform>
                     <TranslateTransform Y="0"/>
                 </local:PaymentInput.RenderTransform>
             </local:PaymentInput>
+            <local:AddItem x:Name="AddItemUc" Visibility="Collapsed" DataContext="{Binding}">
+                <local:AddItem.RenderTransform>
+                    <TranslateTransform Y="0"/>
+                </local:AddItem.RenderTransform>
+            </local:AddItem>
         </Grid>
     </Grid>
 </UserControl>

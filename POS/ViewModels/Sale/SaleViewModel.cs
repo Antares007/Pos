@@ -134,7 +134,10 @@ namespace POS.ViewModels.Sale
             PaymentForm = cq.GetForm("gadakhdisForma");
             ViewState = "Payment";
         }
-
+        public void ShowAddItem()
+        {
+            ViewState = "AddItem";
+        }
         private void UpdateSaleViewModel(Jq cq)
         {
             PaymentForms.Clear();

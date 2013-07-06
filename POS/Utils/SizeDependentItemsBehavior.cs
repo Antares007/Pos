@@ -13,6 +13,7 @@ namespace POS.Utils
     public class SizeDependentItemsBehavior : Behavior<WrapPanel>
     {
         public int ItemsInRow { get; set; }
+        private int _childrenCount = 0;
         WrapPanel _target;
         protected override void OnAttached()
         {
@@ -22,15 +23,21 @@ namespace POS.Utils
             _target = this.AssociatedObject;
             _target.SizeChanged += onSizeChanged;
             _target.Loaded += onLoad;
+            _target.LayoutUpdated += OnLayoutUpdated;
         }
-
         protected override void OnDetaching()
         {
             base.OnDetaching();
             _target.SizeChanged -= onSizeChanged;
             _target.Loaded -= onLoad;
+            _target.LayoutUpdated -= OnLayoutUpdated;
         }
-
+        void OnLayoutUpdated(object sender, EventArgs e)
+        {
+            if (_target.Children.Count != _childrenCount)
+                SetChildrenSizes();
+            _childrenCount = _target.Children.Count;
+        }
         private void onLoad(object sender, EventArgs e)
         {
             SetChildrenSizes();
@@ -57,6 +64,8 @@ namespace POS.Utils
 
         private double GetChildMargins()
         {
+            if (_target.Children.Count == 0)
+                return 8;
             var fe = _target.Children[0] as FrameworkElement;
             return fe.Margin.Left + fe.Margin.Right;
         }

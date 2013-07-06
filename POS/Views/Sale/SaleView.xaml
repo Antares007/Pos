@@ -160,12 +160,13 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <ItemsControl x:Name="PaymentForms"/>
-            <Button Focusable="False" Margin="8" Content="გადახდა" Command="{Binding Submit}" 
+            <Button Focusable="False" 
+				Margin="8" 
+				Content="გადახდა" 
+				Command="{Binding Submit}" 
 				Grid.Row="1" 
 				Padding="24" 
-				Style="{DynamicResource PaymentSubmitButtonStyle}"
-				Foreground="White"
-				FontSize="29"/>
+				Style="{DynamicResource PaymentSubmitButtonStyle}"/>
         </Grid>
         <Canvas>
             <local:IncreaseDecreaseTool Canvas.Left="0" Canvas.Top="0"

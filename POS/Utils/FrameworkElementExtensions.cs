@@ -5,17 +5,17 @@ namespace POS.Utils
 {
     public static class FrameworkElementExtensions
     {
-        public static FrameworkElement Up<T>(this FrameworkElement fe, string name)
+        public static T Up<T>(this FrameworkElement fe, string name)
         {
             var searchType = typeof(T);
             var parent = VisualTreeHelper.GetParent(fe) as FrameworkElement;
             if (parent == null)
-                return null;
+                return (T)(object)null;
             if (parent.GetType() == searchType)
             {
                 var result = parent.Name == name;
                 if (result)
-                    return parent;
+                    return (T)(object)parent;
                 else
                     return parent.Up<T>(name);
             }

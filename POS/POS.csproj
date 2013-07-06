@@ -141,6 +141,7 @@
     <Compile Include="Utils\SizeDependentItemsBehavior.cs" />
     <Compile Include="Utils\BindableDoubleAnimation.cs" />
     <Compile Include="Utils\InverseBool2VisibilityConverter.cs" />
+    <Compile Include="Utils\FrameworkElementExtensions.cs" />
     <Compile Include="ViewModels\Sale\Printing\PartReceiptAmountItem.xaml.cs">
       <DependentUpon>PartReceiptAmountItem.xaml</DependentUpon>
     </Compile>

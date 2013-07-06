@@ -172,6 +172,7 @@ namespace POS.ViewModels.Sale
                 ViewState = "Normal"
             });
             AddItem = cq.GetForm("produktisDamateba");
+            Reset = cq.GetForm("gaukmeba");
             Submit = cq.GetLink("cheki");
             Submit.OnExecuted += () => IsToolVisible = false;
             Func<Jq, ItemViewModel> createItem = (q) =>
@@ -250,5 +251,7 @@ namespace POS.ViewModels.Sale
             }
             ViewState = "Normal";
         }
+
+        public TForm Reset { get; set; }
     }
 }

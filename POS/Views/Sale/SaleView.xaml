@@ -143,7 +143,16 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-            <Button Style="{DynamicResource ShowKeyboardButtonStyle}" Width="80" Height="72" Margin="8"  cal:Message.Attach="ShowAddItem"  Grid.Row="1" HorizontalAlignment="Right"/>
+            <StackPanel Height="70" Margin="8"  Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
+                <Button Style="{DynamicResource PaymentSubmitButtonStyle}"
+                        Command="{Binding Reset}"
+                        Foreground="White"
+                        FontSize="16"
+                        Content="გაუქმება" 
+                        Width="80" 
+                        Margin="2"/>
+                <Button Style="{DynamicResource ShowKeyboardButtonStyle}" Margin="2" Width="80" cal:Message.Attach="ShowAddItem" />
+            </StackPanel>
         </Grid>
         <Grid Margin="4,8,8,8" Background="#CCFFFFFF" Grid.Column="1">
             <Grid.RowDefinitions>

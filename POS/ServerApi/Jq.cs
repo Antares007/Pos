@@ -24,14 +24,14 @@ namespace POS.ServerApi
 
         public TForm GetForm(string form)
         {
-            var template = _o.ArrayObjects("templates").First(x => x.Get<string>("rel") == form);
-
+            var template = _o.ArrayObjects("templates").FirstOrDefault(x => x.Get<string>("rel") == form);
+            if (template == null)
+                return TForm.Disabled;
             var method = template.Get<string>("method") == "post" ? HttpMethod.Post : HttpMethod.Get;
             var href = template.Get<string>("href");
-
-            var fields = template.ArrayObjects("data").ToDictionary(x => x.Get<string>("name"), x => x.Get<string>("value"));
+            var fields = template.ArrayObjects("data")
+                                 .ToDictionary(x => x.Get<string>("name"), x => x.Get<string>("value"));
             return new TForm(method, new string[0], href, fields, _action);
-
         }
 
         public bool IsTitle(string title, Action<Jq> action = null)
@@ -53,7 +53,7 @@ namespace POS.ServerApi
         public TLink GetLink(string gadakhdisforma)
         {
             var link = _o.ArrayObjects("links").FirstOrDefault(x => x.Get<string>("rel") == gadakhdisforma);
-            if(null==link)
+            if (null == link)
                 return new TLink(null, _action);
             var url = link.Get<string>("href");
             return new TLink(url, _action);

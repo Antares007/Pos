@@ -16,7 +16,7 @@ namespace POS.ServerApi
 
         private readonly IDictionary<string, string> _inner;
 
-        public TForm(HttpMethod method, IEnumerable<string> requiredFields, string href,Dictionary<string,string> inner, Action<HttpRequestMessage> requestAction)
+        public TForm(HttpMethod method, IEnumerable<string> requiredFields, string href, Dictionary<string, string> inner, Action<HttpRequestMessage> requestAction)
         {
             _method = method;
             _requiredFields = requiredFields;
@@ -27,11 +27,15 @@ namespace POS.ServerApi
 
         public bool CanExecute(object parameter)
         {
+            if (this.Count == 0)
+                return false;
             return _requiredFields.All(s => !string.IsNullOrWhiteSpace(this[s]));
         }
 
         public void Execute(object parameter)
         {
+            if (!CanExecute(null))
+                return;
             var requestUri = _action;
             var req = new HttpRequestMessage();
             if (_method == HttpMethod.Get)
@@ -111,7 +115,9 @@ namespace POS.ServerApi
         public string this[string key]
         {
             get { return _inner[key]; }
-            set { _inner[key] = value;
+            set
+            {
+                _inner[key] = value;
                 CanExecuteChanged(this, EventArgs.Empty);
             }
         }
@@ -125,7 +131,12 @@ namespace POS.ServerApi
         {
             get { return _inner.Values; }
         }
-        
+
+        public static TForm Disabled
+        {
+            get { return new TForm(HttpMethod.Get, new string[] { }, string.Empty, new Dictionary<string, string>(), (a) => { }); }
+        }
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();

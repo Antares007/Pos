@@ -9,7 +9,16 @@ namespace POS.Views.Sale
         public SaleView()
         {
             InitializeComponent();
-            var customerWindow = new CustomerWindow() { DataContext = ItemsGrid, Left = 1024, Top = 0 };
+            var customerWindow = new CustomerWindow() 
+            {
+                DataContext = new CustomerWindowViewModel()
+                    {
+                        Items = this.ItemsGrid,
+                        Amounts = this.PaymentFormsGrid
+                    },
+                Left = 1024,
+                Top = 0 
+            };
             this.Loaded += (sender, args) =>
                 {
                     PosBootstrapper._msg.GetStream<ApplicationClosingEvent>()

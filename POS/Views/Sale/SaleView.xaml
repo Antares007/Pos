@@ -119,31 +119,33 @@
         <VisualStateManager.CustomVisualStateManager>
             <ei:ExtendedVisualStateManager/>
         </VisualStateManager.CustomVisualStateManager>
-        <Grid x:Name="ItemsGrid" Background="#CCFFFFFF" Margin="8,8,4,8">
+        <Grid x:Name="CenterPanel" Background="#CCFFFFFF" Margin="8,8,4,8">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <ItemsControl x:Name="Items">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid>
-                            <i:Interaction.Behaviors>
-                                <ei:FluidMoveBehavior AppliesTo="Children" Duration="0:0:1">
-                                    <ei:FluidMoveBehavior.EaseY>
-                                        <CircleEase EasingMode="EaseInOut"/>
-                                    </ei:FluidMoveBehavior.EaseY>
-                                    <ei:FluidMoveBehavior.EaseX>
-                                        <CubicEase EasingMode="EaseInOut"/>
-                                    </ei:FluidMoveBehavior.EaseX>
-                                </ei:FluidMoveBehavior>
-                            </i:Interaction.Behaviors>
-                        </UniformGrid>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
+            <Grid x:Name="ItemsGrid" Background="Transparent">
+                <ItemsControl x:Name="Items">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid>
+                                <i:Interaction.Behaviors>
+                                    <ei:FluidMoveBehavior AppliesTo="Children" Duration="0:0:1">
+                                        <ei:FluidMoveBehavior.EaseY>
+                                            <CircleEase EasingMode="EaseInOut"/>
+                                        </ei:FluidMoveBehavior.EaseY>
+                                        <ei:FluidMoveBehavior.EaseX>
+                                            <CubicEase EasingMode="EaseInOut"/>
+                                        </ei:FluidMoveBehavior.EaseX>
+                                    </ei:FluidMoveBehavior>
+                                </i:Interaction.Behaviors>
+                            </UniformGrid>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Grid>
             <StackPanel Height="70" Margin="8"  Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
-                <Button Style="{DynamicResource PaymentSubmitButtonStyle}"
+                <Button Style="{DynamicResource TouchScreenButtonStyle}"
                         Command="{Binding Reset}"
                         Foreground="White"
                         FontSize="16"
@@ -158,14 +160,16 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <ItemsControl x:Name="PaymentForms"/>
+            <Grid x:Name="PaymentFormsGrid" Background="Transparent">
+                <ItemsControl x:Name="PaymentForms"/>
+            </Grid>
             <Button Focusable="False" 
 				Margin="8" 
 				Content="გადახდა" 
 				Command="{Binding Submit}" 
 				Grid.Row="1" 
 				Padding="24" 
-				Style="{DynamicResource PaymentSubmitButtonStyle}"/>
+				Style="{DynamicResource TouchScreenButtonStyle}"/>
         </Grid>
         <Canvas>
             <local:IncreaseDecreaseTool Canvas.Left="0" Canvas.Top="0"

@@ -3,13 +3,28 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         WindowStyle="None"
         Title="CustomerWindow" Height="600" Width="800">
-    <Grid >
-        <Rectangle Fill="{DynamicResource background}"/>
-            <Rectangle HorizontalAlignment="Left" Height="600" Width="600">
-                <Rectangle.Fill>
-                    <VisualBrush Stretch="Fill" Visual="{Binding}" />
-                </Rectangle.Fill>
-            </Rectangle>
-        <Rectangle Width="186" HorizontalAlignment="Right" Fill="#CCFFFFFF"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="1.5*"/>
+        </Grid.ColumnDefinitions>
+        <Rectangle Fill="{DynamicResource background}" Grid.ColumnSpan="2"/>
+        <Rectangle Fill="#CCFFFFFF" Grid.Column="1" Margin="4,8,8,8"/>
+        <Rectangle Fill="#CCFFFFFF" Margin="8,8,4,8"/>
+        <Rectangle  Margin="8,8,4,8"
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch">
+            <Rectangle.Fill>
+                <VisualBrush Visual="{Binding Items}" />
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle  Margin="4,12,8,8"
+                    Grid.Column="1"
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch">
+            <Rectangle.Fill>
+                <VisualBrush Visual="{Binding Amounts}" />
+            </Rectangle.Fill>
+        </Rectangle>
     </Grid>
 </Window>

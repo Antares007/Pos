@@ -24,7 +24,7 @@
                     Grid.Column="1" 
                     Margin="2,8,8,0"
                     Padding="4,16,4,15" FontWeight="Bold" Foreground="White"
-                    FontSize="23.2" Style="{DynamicResource PaymentSubmitButtonStyle}"
+                    FontSize="23.2" Style="{DynamicResource TouchScreenButtonStyle}"
                     HorizontalAlignment="Stretch"/>
 		</Grid>
 		<Controls:OnScreenKeyboard Style="{DynamicResource KeyboardStyle}" Grid.Row="1"/>

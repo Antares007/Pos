@@ -136,6 +136,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CustomerWindowViewModel.cs" />
     <Compile Include="ServerApi\Jq.cs" />
     <Compile Include="Utils\ApplicationClosingEvent.cs" />
     <Compile Include="Utils\PackPanel.cs" />

@@ -13,6 +13,7 @@ namespace POS.Utils
     public class SizeDependentItemsBehavior : Behavior<WrapPanel>
     {
         public int ItemsInRow { get; set; }
+        public int ItemsInColumn { get; set; }
         private int _childrenCount = 0;
         WrapPanel _target;
         protected override void OnAttached()
@@ -52,27 +53,39 @@ namespace POS.Utils
         private void SetChildrenSizes()
         {
             var width = GetChildWidth();
+            var height = GetChildHeight();
             foreach (FrameworkElement fe in _target.Children)
             {
                 fe.Width = width;
-                fe.Height = width;
+                fe.Height = height;
             }
             var tool = _target.Up<SaleView>("SaleViewUc").Down<IncreaseDecreaseTool>("IncrDecrTool");
             tool.Width = width - 6.5;
-            tool.Height = width - 6.5;
+            tool.Height = height - 6.5;
         }
 
-        private double GetChildMargins()
+        private double GetChildHorizontalMargins()
         {
             if (_target.Children.Count == 0)
                 return 8;
             var fe = _target.Children[0] as FrameworkElement;
             return fe.Margin.Left + fe.Margin.Right;
         }
+        private double GetChildVerticalMargins()
+        {
+            if (_target.Children.Count == 0)
+                return 8;
+            var fe = _target.Children[0] as FrameworkElement;
+            return fe.Margin.Top + fe.Margin.Bottom;
+        }
 
         private double GetChildWidth()
         {
-            return (_target.ActualWidth / ItemsInRow) - GetChildMargins();
+            return (_target.ActualWidth / ItemsInRow) - GetChildHorizontalMargins();
+        }
+        private double GetChildHeight()
+        {
+            return (_target.ActualHeight / ItemsInColumn) - GetChildVerticalMargins();
         }
     }
 }

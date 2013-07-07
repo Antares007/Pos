@@ -14,43 +14,52 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="bool2visibility"/>
     </UserControl.Resources>
-	<Grid Background="#7FFFFFFF">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
-		<Grid Background="{DynamicResource BaseColor}" Grid.ColumnSpan="2">
-			<TextBlock Margin="2" TextWrapping="Wrap" x:Name="Name" HorizontalAlignment="Center" FontSize="18" VerticalAlignment="Center" Foreground="White" Grid.Column="1"/>
-		</Grid>
-		<Grid Grid.Row="1" Grid.ColumnSpan="2">
-			<Image Source="{Binding Photo}"/>
-		</Grid>
-		<Grid Margin="2" Background="#7FFFFFFF" TextBlock.FontSize="20" Grid.Row="2">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="Auto"/>
-			</Grid.ColumnDefinitions>
-			<TextBlock TextAlignment="Right" VerticalAlignment="Bottom" Text="{Binding Quantity, NotifyOnTargetUpdated=True}" x:Name="Qty" RenderTransformOrigin="0.5,0.5"/>
-			<TextBlock TextAlignment="Center" VerticalAlignment="Bottom" Grid.Column="1" Text=" x "/>
-			<TextBlock TextAlignment="Left" VerticalAlignment="Bottom" Grid.Column="2" x:Name="UnitPrice"/>
-			<TextBlock TextAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Text=" = "/>
-			<TextBlock VerticalAlignment="Top" TextAlignment="Center" Text="{Binding TotalPrice, NotifyOnTargetUpdated=True}" x:Name="TotPrice" Grid.Column="4" />	
-            <Grid Grid.Column="4" Visibility="{Binding HasDiscount,Converter={StaticResource bool2visibility}}">
-                <Rectangle HorizontalAlignment="Stretch" 
-                           VerticalAlignment="Center" 
-                           Height="1" Fill="Red"/>
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
-                           Foreground="Red"
-                           Text="{Binding DiscountedTotalPrice, NotifyOnTargetUpdated=True}">
-                    <TextBlock.RenderTransform>
-                        <TranslateTransform Y="-15"/>
-                    </TextBlock.RenderTransform>
-                </TextBlock>
+	<Viewbox Stretch="Fill">
+        <Grid Width="250" Height="250" Background="#7FFFFFFF">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Background="{DynamicResource BaseColor}" Grid.ColumnSpan="2">
+                <TextBlock Margin="2" TextWrapping="Wrap" x:Name="Name" HorizontalAlignment="Center" FontSize="18" VerticalAlignment="Center" Foreground="White" Grid.Column="1"/>
             </Grid>
-		</Grid>
-	</Grid>
+            <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                <Image Source="{Binding Photo}"/>
+            </Grid>
+            <Grid Margin="2" Background="#7FFFFFFF" TextBlock.FontSize="28" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock TextAlignment="Right" VerticalAlignment="Bottom" Text="{Binding Quantity, NotifyOnTargetUpdated=True}" x:Name="Qty" RenderTransformOrigin="0.5,0.5"/>
+                <TextBlock TextAlignment="Center" VerticalAlignment="Bottom" Grid.Column="1" Text=" x "/>
+                <TextBlock TextAlignment="Left" VerticalAlignment="Bottom" Grid.Column="2" x:Name="UnitPrice"/>
+                <TextBlock TextAlignment="Center" VerticalAlignment="Center" Grid.Column="3" Text=" = "/>
+                <TextBlock VerticalAlignment="Top"
+                           TextAlignment="Center" 
+                           FontSize="32"
+                           Text="{Binding TotalPrice, NotifyOnTargetUpdated=True}" 
+                           x:Name="TotPrice"
+                           Grid.Column="4" />
+                <Grid Grid.Column="4" Visibility="{Binding HasDiscount,Converter={StaticResource bool2visibility}}">
+                    <Rectangle HorizontalAlignment="Stretch" 
+                               VerticalAlignment="Center" 
+                               Height="1" Fill="Red"/>
+                    <TextBlock VerticalAlignment="Center" 
+                               HorizontalAlignment="Center"
+                               Foreground="Red"
+                               FontSize="32"
+                               Text="{Binding DiscountedTotalPrice, NotifyOnTargetUpdated=True}">
+                        <TextBlock.RenderTransform>
+                            <TranslateTransform Y="-15"/>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Viewbox>
 </UserControl>

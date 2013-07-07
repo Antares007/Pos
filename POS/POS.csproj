@@ -139,11 +139,10 @@
     <Compile Include="CustomerWindowViewModel.cs" />
     <Compile Include="ServerApi\Jq.cs" />
     <Compile Include="Utils\ApplicationClosingEvent.cs" />
-    <Compile Include="Utils\PackPanel.cs" />
-    <Compile Include="Utils\SizeDependentItemsBehavior.cs" />
     <Compile Include="Utils\BindableDoubleAnimation.cs" />
     <Compile Include="Utils\InverseBool2VisibilityConverter.cs" />
     <Compile Include="Utils\FrameworkElementExtensions.cs" />
+    <Compile Include="Utils\SizeSyncBehavior.cs" />
     <Compile Include="ViewModels\Sale\Printing\PartReceiptAmountItem.xaml.cs">
       <DependentUpon>PartReceiptAmountItem.xaml</DependentUpon>
     </Compile>
@@ -180,7 +179,6 @@
     <Compile Include="Utils\KeyConverter.cs" />
     <Compile Include="Utils\MessageAggregator.cs" />
     <Compile Include="Utils\LabelPrinter.cs" />
-    <Compile Include="Utils\PosTextBox.cs" />
     <Compile Include="Utils\StateBindingBehavior.cs" />
     <Compile Include="Utils\WatermarkService.cs" />
     <Compile Include="ViewModels\ProductItemViewModel.cs" />

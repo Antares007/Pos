@@ -24,6 +24,7 @@ namespace POS.Utils
                 return parent.Up<T>(name);
             }
         }
+
         public static FrameworkElement Down<T>(this FrameworkElement fe, string name)
         {
             FrameworkElement result = null;

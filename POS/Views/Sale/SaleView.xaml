@@ -130,6 +130,7 @@
                         <ItemsPanelTemplate>
                             <UniformGrid>
                                 <i:Interaction.Behaviors>
+                                    <utils:SizeSyncBehavior/>
                                     <ei:FluidMoveBehavior AppliesTo="Children" Duration="0:0:1">
                                         <ei:FluidMoveBehavior.EaseY>
                                             <CircleEase EasingMode="EaseInOut"/>

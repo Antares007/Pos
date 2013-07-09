@@ -97,6 +97,7 @@ namespace POS.ViewModels.Sale
                    .TakeUntil(pco.Where(x => x != "Payment"))
                    .Scan("", (s, c) => c == 27 ? "" : s + c)
                    .Repeat()
+                   .ObserveOnDispatcher()
                    .Subscribe(x =>
                        {
                            if (string.IsNullOrWhiteSpace(x))
@@ -113,6 +114,7 @@ namespace POS.ViewModels.Sale
                 .Select(x => string.Join("", x))
                 .TakeUntil(other)
                 .Repeat()
+                .ObserveOnDispatcher()
                 .Subscribe(x =>
                     {
                         AddItem["kodi"] = x;

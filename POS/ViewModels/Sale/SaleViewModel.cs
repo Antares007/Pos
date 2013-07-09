@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive;
@@ -10,6 +11,7 @@ using System.Windows.Forms;
 using System.Windows.Media.Animation;
 using Caliburn.Micro;
 using POS.ServerApi;
+using POS.Utils;
 using POS.ViewModels.Sale.Printing;
 using UserControl = System.Windows.Controls.UserControl;
 
@@ -253,5 +255,13 @@ namespace POS.ViewModels.Sale
         }
 
         public TForm Reset { get; set; }
+
+        #region Temp
+        public void PrintPrice(ItemViewModel item)
+        {
+            new LabelPrinter(ConfigurationManager.AppSettings["zebra"])
+                    .PrintPrice(decimal.Parse(item.UnitPrice));
+        }
+        #endregion
     }
 }

@@ -8,7 +8,8 @@
              xmlns:ee="http://schemas.microsoft.com/expression/2010/effects"
              x:Class="POS.Views.Sale.ItemView" 
              mc:Ignorable="d" Margin="4"
-             cal:Message.Attach="[Event PreviewMouseLeftButtonDown] = [Action ItemMouseDown($this)]"
+             cal:Message.Attach="[Event PreviewMouseLeftButtonDown] = [Action ItemMouseDown($this)];
+                                 [Event PreviewMouseDoubleClick] = [Action PrintPrice($dataContext)]"
              BorderThickness="1" BorderBrush="{DynamicResource BaseColor}"
              TextBlock.Foreground="{DynamicResource BaseColor}">
     <UserControl.Resources>

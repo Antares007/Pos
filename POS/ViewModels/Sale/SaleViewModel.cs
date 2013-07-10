@@ -30,6 +30,7 @@ namespace POS.ViewModels.Sale
         private TForm _increaseQuantity;
         private TForm _decreaseQuantity;
         private bool _isToolVisible;
+        private TForm _reset;
 
         public TForm IncreaseQuantity
         {
@@ -256,7 +257,11 @@ namespace POS.ViewModels.Sale
             ViewState = "Normal";
         }
 
-        public TForm Reset { get; set; }
+        public TForm Reset
+        {
+            get { return _reset; }
+            set { _reset = value; NotifyOfPropertyChange(() => Reset); }
+        }
 
         #region Temp
         public void PrintPrice(ItemViewModel item)

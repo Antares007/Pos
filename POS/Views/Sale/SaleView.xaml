@@ -8,7 +8,6 @@
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:local="clr-namespace:POS.Views.Sale"
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" 
-             xmlns:ee="http://schemas.microsoft.com/expression/2010/effects"
              x:Class="POS.Views.Sale.SaleView"
              mc:Ignorable="d"
              d:DesignHeight="766" d:DesignWidth="1024">

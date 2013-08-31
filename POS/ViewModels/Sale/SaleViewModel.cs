@@ -185,7 +185,7 @@ namespace POS.ViewModels.Sale
                 {
                     Id = q.GetText("id"),
                     Version = q.GetText("versia"),
-                    Name = q.GetText("dasakheleba"),
+                    Name = q.GetText("ref") + " " + q.GetText("dasakheleba"),
                     Ean = q.GetText("ean"),
                     Reference = q.GetText("ref"),
                     Quantity = q.GetText("raodenoba"),

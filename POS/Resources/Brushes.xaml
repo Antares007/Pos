@@ -5,6 +5,7 @@
 	<SolidColorBrush x:Key="TeritaryColor" Color="#FFFE000D"/>
     <SolidColorBrush x:Key="Quaternary" Color="#FF35B82E"/>
 	<ImageBrush x:Key="keyboardIcon" ImageSource="/Resources/Images/Icons/Keyboard.png"/>
+	<ImageBrush x:Key="settingsIcon" ImageSource="/Resources/Images/Icons/settings.png"/>
 	<ImageBrush x:Key="backIcon" ImageSource="/Resources/Images/Icons/backIcon.png"/>
 	<ImageBrush x:Key="searchIcon" ImageSource="/Resources/Images/Icons/search.png"/>
 	<ImageBrush x:Key="anvol" ImageSource="/Resources/Images/Logos/anvol.png"/>

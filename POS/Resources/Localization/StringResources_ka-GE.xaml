@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="Gadakhda">გადახდა</system:String>
+    <system:String x:Key="Nagdi">ნაღდი</system:String>
+    <system:String x:Key="SakreditoBarati">საკრედიტო ბარათი</system:String>
+    <system:String x:Key="SasachukreBarati">სასაჩუქრე ბარათი</system:String>
+    <system:String x:Key="SulGadakhdili">სულ გადახდილი</system:String>
+    <system:String x:Key="SulGadasakhdeli">სულ გადასახდელი</system:String>
+    <system:String x:Key="Khurda">ხურდა</system:String>
+    <system:String x:Key="Gaukmeba">გაუქმება</system:String>
+    <system:String x:Key="Damateba">დამატება</system:String>
+    <system:String x:Key="Cashla">წაშლა</system:String>
+</ResourceDictionary>

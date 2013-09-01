@@ -4,6 +4,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:Controls="clr-namespace:WpfKb.Controls;assembly=WpfKb"
+	xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
 	mc:Ignorable="d"
 	x:Class="POS.Views.Sale.AddItem"
 	Width="900" Height="400">
@@ -19,7 +20,7 @@
 				<ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
             <TextBox  x:Name="ItemCode" Text="{Binding AddItem[kodi], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="72,8,2,0" FontSize="30"/>
-			<Button Content="დამატება"
+			<Button Content="{DynamicResource Damateba}"
                     Command="{Binding AddItem}"
                     Grid.Column="1" 
                     Margin="2,8,8,0"
@@ -28,5 +29,9 @@
                     HorizontalAlignment="Stretch"/>
 		</Grid>
 		<Controls:OnScreenKeyboard Style="{DynamicResource KeyboardStyle}" Grid.Row="1"/>
-	</Grid>
+        <Button Content="{DynamicResource Cashla}" Grid.Row="1" 
+                HorizontalAlignment="Right" Click="ClearClick"
+                VerticalAlignment="Top" Style="{DynamicResource TouchScreenButtonStyle}"
+                Padding="22,19" Margin="8,6"/>
+    </Grid>
 </UserControl>

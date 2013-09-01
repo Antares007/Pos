@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="POS.Views.Sale.Settings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Height="100" Width="300">
+    <UserControl.Resources>
+        <Style TargetType="RadioButton" x:Key="ToggleRadio">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <ToggleButton 
+                            Background="{DynamicResource BaseColor}"
+                            Foreground="White"
+                            FontSize="22"
+                            IsChecked="{Binding IsChecked, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                          Content="{Binding Content, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                          Padding="{Binding Padding, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel x:Name="Languages" Margin="2" Orientation="Horizontal">
+            <RadioButton Margin="1" Padding="4,0" Style="{StaticResource ToggleRadio}" Content="ქართული" GroupName="LANG" Tag="ka-GE"/>
+            <RadioButton Margin="1" Padding="4,0" Style="{StaticResource ToggleRadio}" Content="English" GroupName="LANG" Tag="en-US"/>
+            <RadioButton Margin="1" Padding="4,0" Style="{StaticResource ToggleRadio}" Content="Русский" GroupName="LANG" Tag="ru-RU"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

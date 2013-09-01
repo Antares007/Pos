@@ -7,7 +7,8 @@ namespace POS.ViewModels.Sale
     {
         private string _viewState;
         public TLink Link { get; set; }
-        public string Name { get; set; }
+        //public string Name { get; set; }
+        public string StringResourceKey { get; set; }
         public string Value { get; set; }
         public string Value2 { get; set; }
         public string ViewState

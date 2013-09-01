@@ -58,7 +58,7 @@ namespace WpfKb.Controls
                                    new OnScreenKey { GridRow = 0, GridColumn = 10, Key =  new ShiftSensitiveKey(VirtualKeyCode.VK_0, new List<string> { "0", ")" })},
                                    new OnScreenKey { GridRow = 0, GridColumn = 11, Key =  new ShiftSensitiveKey(VirtualKeyCode.OEM_MINUS, new List<string> { "-", "_" })},
                                    new OnScreenKey { GridRow = 0, GridColumn = 12, Visibility = Visibility.Collapsed, Key =  new ShiftSensitiveKey(VirtualKeyCode.OEM_PLUS, new List<string> { "=", "+" })},
-                                   new OnScreenKey { GridRow = 0, GridColumn = 12, Key =  new VirtualKey(VirtualKeyCode.BACK, "წაშლა"), GridWidth = new GridLength(2, GridUnitType.Star)},
+                                   new OnScreenKey { GridRow = 0, GridColumn = 12, Visibility = Visibility.Collapsed, Key =  new VirtualKey(VirtualKeyCode.BACK, "წაშლა"), GridWidth = new GridLength(2, GridUnitType.Star)},
 
                                    new OnScreenKey { GridRow = 1, GridColumn = 0, Key =  new VirtualKey(VirtualKeyCode.TAB, "Tab"),Visibility = Visibility.Collapsed, GridWidth = new GridLength(1.5, GridUnitType.Star)},
                                    new OnScreenKey { GridRow = 1, GridColumn = 1, Key =  new StringKey("Q","Q")},

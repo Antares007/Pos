@@ -145,6 +145,10 @@ namespace POS.ViewModels.Sale
         {
             ViewState = "AddItem";
         }
+        public void ShowSettings()
+        {
+            ViewState = "SettingsShown";
+        }
         private void UpdateSaleViewModel(Jq cq)
         {
             PaymentForms.Clear();
@@ -152,27 +156,27 @@ namespace POS.ViewModels.Sale
                 cqq => new AmountItemViewModel()
             {
                 Link = cqq.GetLink("gadakhdisForma"),
-                Name = cqq.GetText("dasakheleba"),
+                StringResourceKey = PaymentName2ResKeyConverter.Convert(cqq.GetText("dasakheleba")),
                 Value = cqq.GetText("tankha"),
                 ViewState = "Plus"
             }));
             PaymentForms.Last().ViewState = "Equals";
             PaymentForms.Add(new AmountItemViewModel()
                 {
-                    Name = "სულ გადახდილი",
+                    StringResourceKey = PaymentName2ResKeyConverter.Convert("სულ გადახდილი"),
                     Value = cq.GetText("sulMigebuliTankha"),
                     ViewState = "Minus"
                 });
             PaymentForms.Add(new AmountItemViewModel()
                 {
-                    Name = "სულ გადასახდელი",
+                    StringResourceKey = PaymentName2ResKeyConverter.Convert("სულ გადასახდელი"),
                     Value = cq.GetText("misagebiTankha"),
                     Value2 = cq.GetText("fasdaklebuliMisagebiTankha"),
                     ViewState = "Equals"
                 });
             PaymentForms.Add(new AmountItemViewModel()
             {
-                Name = "ხურდა",
+                StringResourceKey = PaymentName2ResKeyConverter.Convert("ხურდა"),
                 Value = cq.GetText("gasacemiTankha"),
                 ViewState = "Normal"
             });

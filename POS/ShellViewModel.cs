@@ -9,9 +9,11 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using Caliburn.Micro;
+using Microsoft.Expression.Interactivity.Core;
 using POS.ServerApi;
 using POS.Utils;
 using System.Linq;
+using Telerik.Windows.Controls;
 using KeyConverter = POS.Utils.KeyConverter;
 
 namespace POS
@@ -32,20 +34,15 @@ namespace POS
                 return ConfigurationManager.AppSettings["pos"] == "1" || 
                     ConfigurationManager.AppSettings["pos"] == "2" 
             ? Visibility.Collapsed : Visibility.Visible; } }
-
         public INavigator Navigator { get; set; }
-
-        [ImportingConstructor]
-        public ShellViewModel(IMessageAggregator msgAgr)
+        public ShellViewModel()
         {
             IsKeyboardVisible = Visibility.Collapsed;
         }
-
         public void ShowKeyboard()
         {
             IsKeyboardVisible = IsKeyboardVisible == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
         }
-
         public void Show(ScreenActivationContext sac)
         {
             //var screenType = sac.GetScreenType();
@@ -58,13 +55,10 @@ namespace POS
         {
             Navigator.GoBack();
         }
-
-
         public void KeyDown(KeyEventArgs args)
         {
             Scanner.ObservableKeys.OnNext(KeyConverter.GetCharFromKey(args.Key));
         }
-
     }
     public static class Scanner
     {

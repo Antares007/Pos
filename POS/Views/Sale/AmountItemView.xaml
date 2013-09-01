@@ -68,12 +68,20 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid Visibility="{Binding HasLink,Converter={StaticResource Bool2Visibility}}" HorizontalAlignment="Stretch" Background="{DynamicResource BaseColor}" TextBlock.Foreground="White">
-                <TextBlock Margin="8" x:Name="Name" VerticalAlignment="Center"
-                           HorizontalAlignment="Left" Style="{DynamicResource SanetFontStyle}"/>
+                <TextBlock Margin="8" x:Name="Name1" VerticalAlignment="Center"
+                           HorizontalAlignment="Left" Style="{DynamicResource SanetFontStyle}">
+                    <i:Interaction.Behaviors>
+                        <Utils:ResourceKeyBindingBehavior/>
+                    </i:Interaction.Behaviors>
+                </TextBlock>
             </Grid>
             <TextBlock Visibility="{Binding HasLink,Converter={StaticResource InverseBool2Visibility}}"
-                       Margin="8" x:Name="Name2" Text="{Binding Name}" VerticalAlignment="Center"
-                           HorizontalAlignment="Left" Style="{DynamicResource SanetFontStyle}"/>
+                       Margin="8" x:Name="Name2" VerticalAlignment="Center"
+                           HorizontalAlignment="Left" Style="{DynamicResource SanetFontStyle}">
+                    <i:Interaction.Behaviors>
+                        <Utils:ResourceKeyBindingBehavior/>
+                    </i:Interaction.Behaviors>
+            </TextBlock>
             <Grid Grid.Column="1">
                 <Border BorderBrush="{DynamicResource BaseColor}" Visibility="{Binding HasLink,Converter={StaticResource Bool2Visibility}}" BorderThickness="1" >
                 </Border>

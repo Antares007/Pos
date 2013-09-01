@@ -232,6 +232,8 @@ namespace WpfKb.Controls
                                //SnapsToDevicePixels = true
                            };
             _keyText.SetBinding(TextBlock.TextProperty, new Binding("DisplayName") { Source = key });
+            //if(key.DisplayName == "წაშლა")
+
             g.Children.Add(_keyText);
 
             key.PropertyChanged += Key_PropertyChanged;

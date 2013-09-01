@@ -142,6 +142,8 @@
     <Compile Include="Utils\BindableDoubleAnimation.cs" />
     <Compile Include="Utils\InverseBool2VisibilityConverter.cs" />
     <Compile Include="Utils\FrameworkElementExtensions.cs" />
+    <Compile Include="Utils\PaymentName2ResKeyConverter.cs" />
+    <Compile Include="Utils\ResourceKeyBindingBehavior.cs" />
     <Compile Include="Utils\SizeSyncBehavior.cs" />
     <Compile Include="ViewModels\Sale\Printing\PartReceiptAmountItem.xaml.cs">
       <DependentUpon>PartReceiptAmountItem.xaml</DependentUpon>
@@ -202,6 +204,9 @@
     <Compile Include="Views\Sale\SaleView.xaml.cs">
       <DependentUpon>SaleView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Sale\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PosBootstrapper.cs" />
@@ -235,6 +240,18 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Resources\Brushes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Localization\StringResources_en-US.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Localization\StringResources_ka-GE.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Localization\StringResources_ru-RU.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -302,6 +319,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Sale\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SuggestionsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -343,7 +364,9 @@
   <ItemGroup>
     <Resource Include="anvol.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Images\Icons\settings.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

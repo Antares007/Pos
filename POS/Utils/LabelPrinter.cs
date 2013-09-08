@@ -1,4 +1,5 @@
-﻿using Com.SharpZebra;
+﻿using System.Globalization;
+using Com.SharpZebra;
 using Com.SharpZebra.Commands.Codes;
 using Com.SharpZebra.Printing;
 using POS.Utils;
@@ -35,7 +36,7 @@ namespace POS.Utils
 
         public void PrintPrice(decimal price)
         {
-            var priceString = price.ToString();
+            var priceString = price.ToString(CultureInfo.InvariantCulture);
             var priceWidth = priceString.Length * PriceCharWidth;
             var priceStart = PageStart + ((PageWidth - priceWidth) / 2);
             var commands = new ZebraCommands();

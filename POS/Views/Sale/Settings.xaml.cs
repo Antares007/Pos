@@ -24,7 +24,7 @@ namespace POS.Views.Sale
         public Settings()
         {
             InitializeComponent();
-            var culture = Thread.CurrentThread.CurrentCulture.Name;
+            var culture = App.CurrentCulture.Name;
             var currentLangRadio = Languages.Children.OfType<RadioButton>().FirstOrDefault(x => x.Tag.ToString() == culture);
             if (currentLangRadio != null)
                 currentLangRadio.IsChecked = true;

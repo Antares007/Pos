@@ -14,6 +14,7 @@ namespace POS
     /// </summary>
     public partial class App : Application
     {
+        public static CultureInfo CurrentCulture;
         Mutex _myMutex;
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -54,8 +55,7 @@ namespace POS
                 Application.Current.Resources.MergedDictionaries.Remove(resourceDictionary);
                 Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
             }
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(culture);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
+            App.CurrentCulture = CultureInfo.CreateSpecificCulture(culture);
         }
     }
 }

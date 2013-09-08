@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Configuration;
+using System.Globalization;
 using Com.SharpZebra;
 using Com.SharpZebra.Commands.Codes;
 using Com.SharpZebra.Printing;
@@ -9,22 +10,26 @@ namespace POS.Utils
     public class LabelPrinter
     {
         private readonly string _printerName;
-        private const int PageWidth = 292;
-        private const int PageStart = 65;
-        private const int PriceCharWidth = 30;
-        private const int ReadableBarcodeCharWidth = 12;
+        private readonly int _pageWidth = 292;
+        private readonly int _pageStart = 40;
+        private readonly int _priceCharWidth = 30;
+        private readonly int _readableBarcodeCharWidth = 12;
         public LabelPrinter(string printerName)
         {
             _printerName = printerName;
+            _pageWidth = int.Parse(ConfigurationManager.AppSettings["PageWidth"]);
+            _pageStart = int.Parse(ConfigurationManager.AppSettings["PageStart"]);
+            _priceCharWidth = int.Parse(ConfigurationManager.AppSettings["PriceCharWidth"]);
+            _readableBarcodeCharWidth = int.Parse(ConfigurationManager.AppSettings["ReadableBarcodeCharWidth"]);
         }
 
         public void PrintPriceAndBarcode(decimal price, string barcode)
         {
             var priceString = price.ToString();
-            var priceWidth = priceString.Length * PriceCharWidth;
-            var priceStart = PageStart + ((PageWidth - priceWidth) / 2);
-            var barcodeWidth = barcode.Length * ReadableBarcodeCharWidth;
-            var readableBarcodeStart = PageStart + ((PageWidth - barcodeWidth) / 2);
+            var priceWidth = priceString.Length * _priceCharWidth;
+            var priceStart = _pageStart + ((_pageWidth - priceWidth) / 2);
+            var barcodeWidth = barcode.Length * _readableBarcodeCharWidth;
+            var readableBarcodeStart = _pageStart + ((_pageWidth - barcodeWidth) / 2);
             var commands = new ZebraCommands();
             commands.Add(ZebraCommands.TextCommand(priceStart, 20, ElementRotation.NO_ROTATION, StandardZebraFont.LARGE, 2, 2, false, priceString));
             commands.Add(ZebraCommands.BlackLine(75, 80, 270, 1));
@@ -37,8 +42,8 @@ namespace POS.Utils
         public void PrintPrice(decimal price)
         {
             var priceString = price.ToString(CultureInfo.InvariantCulture);
-            var priceWidth = priceString.Length * PriceCharWidth;
-            var priceStart = PageStart + ((PageWidth - priceWidth) / 2);
+            var priceWidth = priceString.Length * _priceCharWidth;
+            var priceStart = _pageStart + ((_pageWidth - priceWidth) / 2);
             var commands = new ZebraCommands();
             commands.Add(ZebraCommands.TextCommand(priceStart, 60, ElementRotation.NO_ROTATION, StandardZebraFont.LARGEST, 1, 1, false, priceString));
             new ZebraPrinter(_printerName)

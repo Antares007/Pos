@@ -27,7 +27,39 @@
             </utils:BindableDoubleAnimation>
         </Storyboard>
         <BooleanToVisibilityConverter x:Key="Bool2Visibility"/>
+        <Storyboard x:Key="ShowCard">
+        	<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="CardGrid">
+        		<DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+        	</ObjectAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="cardView">
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<CubicEase EasingMode="EaseInOut"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        	</DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HideCard">
+        	<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="CardGrid">
+        		<DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}"/>
+        	</ObjectAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="cardView">
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="300">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<CubicEase EasingMode="EaseInOut"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        	</DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </UserControl.Resources>
+	<i:Interaction.Triggers>
+		<ei:DataTrigger Binding="{Binding IsCardVisible}" Value="True">
+			<ei:ControlStoryboardAction Storyboard="{StaticResource ShowCard}"/>
+		</ei:DataTrigger>
+		<ei:DataTrigger Binding="{Binding IsCardVisible}" Value="False">
+			<ei:ControlStoryboardAction Storyboard="{StaticResource HideCard}"/>
+		</ei:DataTrigger>
+	</i:Interaction.Triggers>
     <i:Interaction.Behaviors>
         <utils:StateBindingBehavior/>
     </i:Interaction.Behaviors>
@@ -203,6 +235,18 @@
 				Grid.Row="1" 
 				Padding="24" 
 				Style="{DynamicResource TouchScreenButtonStyle}"/>
+            <Grid x:Name="CardGrid" VerticalAlignment="Bottom" Visibility="Collapsed">
+                <local:CardView x:Name="cardView" DataContext="{Binding CardViewModel}" Width="300" Height="200" RenderTransformOrigin="0.5,0.5">
+                	<local:CardView.RenderTransform>
+                		<TransformGroup>
+                			<ScaleTransform/>
+                			<SkewTransform/>
+                			<RotateTransform/>
+                			<TranslateTransform X="300"/>
+                		</TransformGroup>
+                	</local:CardView.RenderTransform>
+                </local:CardView>
+            </Grid>
         </Grid>
         <Canvas>
             <local:IncreaseDecreaseTool Canvas.Left="0" Canvas.Top="0"

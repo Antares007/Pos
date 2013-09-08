@@ -145,6 +145,7 @@
     <Compile Include="Utils\PaymentName2ResKeyConverter.cs" />
     <Compile Include="Utils\ResourceKeyBindingBehavior.cs" />
     <Compile Include="Utils\SizeSyncBehavior.cs" />
+    <Compile Include="ViewModels\Sale\CardViewModel.cs" />
     <Compile Include="ViewModels\Sale\Printing\PartReceiptAmountItem.xaml.cs">
       <DependentUpon>PartReceiptAmountItem.xaml</DependentUpon>
     </Compile>
@@ -194,6 +195,9 @@
     <Compile Include="ViewModels\HyperMediaViewModel.cs" />
     <Compile Include="Views\Sale\AddItem.xaml.cs">
       <DependentUpon>AddItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sale\CardView.xaml.cs">
+      <DependentUpon>CardView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Sale\IncreaseDecreaseTool.xaml.cs">
       <DependentUpon>IncreaseDecreaseTool.xaml</DependentUpon>
@@ -299,6 +303,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Sale\CardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Sale\IncreaseDecreaseTool.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -366,6 +374,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Icons\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Icons\CreditCard.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

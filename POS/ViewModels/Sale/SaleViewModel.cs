@@ -31,6 +31,21 @@ namespace POS.ViewModels.Sale
         private TForm _decreaseQuantity;
         private bool _isToolVisible;
         private TForm _reset;
+        private bool _isCardVisible;
+        private CardViewModel _cardViewModel;
+
+
+        public CardViewModel CardViewModel
+        {
+            get { return _cardViewModel; }
+            set { _cardViewModel = value; NotifyOfPropertyChange(()=>CardViewModel); }
+        }
+
+        public bool IsCardVisible
+        {
+            get { return _isCardVisible; }
+            set { _isCardVisible = value; NotifyOfPropertyChange(()=>IsCardVisible); }
+        }
 
         public TForm IncreaseQuantity
         {
@@ -183,6 +198,13 @@ namespace POS.ViewModels.Sale
             AddItem = cq.GetForm("produktisDamateba");
             Reset = cq.GetForm("gaukmeba");
             Submit = cq.GetLink("cheki");
+            IsCardVisible = !string.IsNullOrEmpty(cq.GetText("klientisBaratisNomeri"));
+            if(IsCardVisible)
+                CardViewModel = new CardViewModel()
+                    {
+                        CardNumber = cq.GetText("klientisBaratisNomeri"),
+                        Discount = cq.GetText("klientisFasdaklebisProcenti")
+                    };
             Submit.OnExecuted += () => IsToolVisible = false;
             Func<Jq, ItemViewModel> createItem = (q) =>
                 new ItemViewModel()

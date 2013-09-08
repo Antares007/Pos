@@ -12,4 +12,5 @@
 	<ImageBrush x:Key="logo1" ImageSource="/Resources/Images/Logos/logo1.png"/>
 	<ImageBrush x:Key="logo2" ImageSource="/Resources/Images/Logos/logo2.png"/>
     <ImageBrush x:Key="background" ImageSource="/Resources/Images/Backgrounds/1.jpg"/>
+    <ImageBrush x:Key="creditCard" ImageSource="/Resources/Images/Icons/CreditCard.png"/>
 </ResourceDictionary>

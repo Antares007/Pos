@@ -31,8 +31,10 @@ namespace POS
         {
             get
             {
-                return ConfigurationManager.AppSettings["pos"] == "1" || 
-                    ConfigurationManager.AppSettings["pos"] == "2" 
+                return ConfigurationManager.AppSettings["pos"] == "1" ||
+                    ConfigurationManager.AppSettings["pos"] == "2" ||
+                    ConfigurationManager.AppSettings["pos"] == "3" ||
+                    ConfigurationManager.AppSettings["pos"] == "4" 
             ? Visibility.Collapsed : Visibility.Visible; } }
         public INavigator Navigator { get; set; }
         public ShellViewModel()
